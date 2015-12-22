@@ -1,1 +1,13 @@
+PODS:
+  - GoogleMaps (1.11.1)
+  - INTULocationManager (4.1.1)
+
+DEPENDENCIES:
+  - GoogleMaps
+  - INTULocationManager
+
+SPEC CHECKSUMS:
+  GoogleMaps: c947160008f414c66707a5ea60f35e92055c7670
+  INTULocationManager: 83c7373048d583cda57e25eefb9bb8a3675acf16
+
 COCOAPODS: 0.39.0

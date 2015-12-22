@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4FF8D75CF7E7E30DB87E6EA6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FB502E85D356C3E068823B /* Pods.framework */; };
 		819341F81C28909D003CA883 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819341F71C28909D003CA883 /* AppDelegate.swift */; };
 		819341FA1C28909D003CA883 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819341F91C28909D003CA883 /* ViewController.swift */; };
 		819341FD1C28909D003CA883 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 819341FB1C28909D003CA883 /* Main.storyboard */; };
@@ -14,6 +15,14 @@
 		819342021C28909D003CA883 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 819342001C28909D003CA883 /* LaunchScreen.storyboard */; };
 		8193420D1C28909D003CA883 /* NearbyParkFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8193420C1C28909D003CA883 /* NearbyParkFinderTests.swift */; };
 		819342181C28909D003CA883 /* NearbyParkFinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819342171C28909D003CA883 /* NearbyParkFinderUITests.swift */; };
+		819342271C28AC20003CA883 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819342261C28AC20003CA883 /* LocationManager.swift */; };
+		8193422D1C28B039003CA883 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8193422C1C28B039003CA883 /* Strings.swift */; };
+		819342331C28BBC4003CA883 /* Signika-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8193422F1C28BBC4003CA883 /* Signika-Bold.otf */; };
+		819342341C28BBC4003CA883 /* Signika-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 819342301C28BBC4003CA883 /* Signika-Light.otf */; };
+		819342351C28BBC4003CA883 /* Signika-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 819342311C28BBC4003CA883 /* Signika-Regular.otf */; };
+		819342361C28BBC4003CA883 /* Signika-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 819342321C28BBC4003CA883 /* Signika-Semibold.otf */; };
+		8193423A1C28D8DE003CA883 /* LocationVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819342391C28D8DE003CA883 /* LocationVerificationViewController.swift */; };
+		8193423C1C28F058003CA883 /* LocationVerificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8193423B1C28F058003CA883 /* LocationVerificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17FB502E85D356C3E068823B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		793CADC5243E66B8FDE21492 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		819341F41C28909D003CA883 /* NearbyParkFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearbyParkFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819341F71C28909D003CA883 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		819341F91C28909D003CA883 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +58,16 @@
 		819342131C28909D003CA883 /* NearbyParkFinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NearbyParkFinderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		819342171C28909D003CA883 /* NearbyParkFinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyParkFinderUITests.swift; sourceTree = "<group>"; };
 		819342191C28909D003CA883 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		819342261C28AC20003CA883 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		819342281C28AC94003CA883 /* NearbyParkFinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NearbyParkFinder-Bridging-Header.h"; sourceTree = "<group>"; };
+		8193422C1C28B039003CA883 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		8193422F1C28BBC4003CA883 /* Signika-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Signika-Bold.otf"; path = "signika/Signika-Bold.otf"; sourceTree = "<group>"; };
+		819342301C28BBC4003CA883 /* Signika-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Signika-Light.otf"; path = "signika/Signika-Light.otf"; sourceTree = "<group>"; };
+		819342311C28BBC4003CA883 /* Signika-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Signika-Regular.otf"; path = "signika/Signika-Regular.otf"; sourceTree = "<group>"; };
+		819342321C28BBC4003CA883 /* Signika-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Signika-Semibold.otf"; path = "signika/Signika-Semibold.otf"; sourceTree = "<group>"; };
+		819342391C28D8DE003CA883 /* LocationVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVerificationViewController.swift; sourceTree = "<group>"; };
+		8193423B1C28F058003CA883 /* LocationVerificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVerificationManager.swift; sourceTree = "<group>"; };
+		D8A5938812105C92651A63DC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FF8D75CF7E7E30DB87E6EA6 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +96,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AE0217BB67219AF69F20701 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D8A5938812105C92651A63DC /* Pods.debug.xcconfig */,
+				793CADC5243E66B8FDE21492 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		124708A005EAAC9364B863F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				17FB502E85D356C3E068823B /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		819341EB1C28909D003CA883 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +120,8 @@
 				8193420B1C28909D003CA883 /* NearbyParkFinderTests */,
 				819342161C28909D003CA883 /* NearbyParkFinderUITests */,
 				819341F51C28909D003CA883 /* Products */,
+				0AE0217BB67219AF69F20701 /* Pods */,
+				124708A005EAAC9364B863F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,12 +138,16 @@
 		819341F61C28909D003CA883 /* NearbyParkFinder */ = {
 			isa = PBXGroup;
 			children = (
+				8193422E1C28BB5A003CA883 /* Resources */,
+				819342251C28ABC6003CA883 /* Managers */,
 				819341F71C28909D003CA883 /* AppDelegate.swift */,
+				819342391C28D8DE003CA883 /* LocationVerificationViewController.swift */,
 				819341F91C28909D003CA883 /* ViewController.swift */,
 				819341FB1C28909D003CA883 /* Main.storyboard */,
 				819341FE1C28909D003CA883 /* Assets.xcassets */,
 				819342001C28909D003CA883 /* LaunchScreen.storyboard */,
 				819342031C28909D003CA883 /* Info.plist */,
+				819342281C28AC94003CA883 /* NearbyParkFinder-Bridging-Header.h */,
 			);
 			path = NearbyParkFinder;
 			sourceTree = "<group>";
@@ -125,6 +170,27 @@
 			path = NearbyParkFinderUITests;
 			sourceTree = "<group>";
 		};
+		819342251C28ABC6003CA883 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				819342261C28AC20003CA883 /* LocationManager.swift */,
+				8193423B1C28F058003CA883 /* LocationVerificationManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		8193422E1C28BB5A003CA883 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8193422F1C28BBC4003CA883 /* Signika-Bold.otf */,
+				819342301C28BBC4003CA883 /* Signika-Light.otf */,
+				819342311C28BBC4003CA883 /* Signika-Regular.otf */,
+				819342321C28BBC4003CA883 /* Signika-Semibold.otf */,
+				8193422C1C28B039003CA883 /* Strings.swift */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +198,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8193421C1C28909D003CA883 /* Build configuration list for PBXNativeTarget "NearbyParkFinder" */;
 			buildPhases = (
+				57F66E810643074070FA3175 /* Check Pods Manifest.lock */,
 				819341F01C28909D003CA883 /* Sources */,
 				819341F11C28909D003CA883 /* Frameworks */,
 				819341F21C28909D003CA883 /* Resources */,
+				90E67D6E0EEFA856F119F175 /* Embed Pods Frameworks */,
+				DF3F5FC95C3994C69C43F0A9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -230,8 +299,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				819342021C28909D003CA883 /* LaunchScreen.storyboard in Resources */,
+				819342351C28BBC4003CA883 /* Signika-Regular.otf in Resources */,
+				819342361C28BBC4003CA883 /* Signika-Semibold.otf in Resources */,
+				819342341C28BBC4003CA883 /* Signika-Light.otf in Resources */,
 				819341FF1C28909D003CA883 /* Assets.xcassets in Resources */,
 				819341FD1C28909D003CA883 /* Main.storyboard in Resources */,
+				819342331C28BBC4003CA883 /* Signika-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,13 +324,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		57F66E810643074070FA3175 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		90E67D6E0EEFA856F119F175 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF3F5FC95C3994C69C43F0A9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		819341F01C28909D003CA883 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8193423A1C28D8DE003CA883 /* LocationVerificationViewController.swift in Sources */,
+				8193423C1C28F058003CA883 /* LocationVerificationManager.swift in Sources */,
 				819341FA1C28909D003CA883 /* ViewController.swift in Sources */,
 				819341F81C28909D003CA883 /* AppDelegate.swift in Sources */,
+				8193422D1C28B039003CA883 /* Strings.swift in Sources */,
+				819342271C28AC20003CA883 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +477,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -389,29 +515,37 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		8193421D1C28909D003CA883 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8A5938812105C92651A63DC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NearbyParkFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adamschoonmaker.NearbyParkFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NearbyParkFinder/NearbyParkFinder-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		8193421E1C28909D003CA883 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 793CADC5243E66B8FDE21492 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NearbyParkFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adamschoonmaker.NearbyParkFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NearbyParkFinder/NearbyParkFinder-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -482,6 +616,7 @@
 				8193421E1C28909D003CA883 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8193421F1C28909D003CA883 /* Build configuration list for PBXNativeTarget "NearbyParkFinderTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +625,7 @@
 				819342211C28909D003CA883 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		819342221C28909D003CA883 /* Build configuration list for PBXNativeTarget "NearbyParkFinderUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +634,7 @@
 				819342241C28909D003CA883 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

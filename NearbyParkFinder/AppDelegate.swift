@@ -6,6 +6,7 @@
 //  Copyright © 2015 Adam Schoonmaker. All rights reserved.
 //
 
+import GoogleMaps
 import UIKit
 
 @UIApplicationMain
@@ -15,8 +16,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        initialize()
         return true
+    }
+    
+    /// Prepare the app before launching
+    func initialize() {
+
+        for family: String in UIFont.familyNames()
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNamesForFamilyName(family)
+            {
+                print("== \(names)")
+            }
+        }
+        
+        initializeGoogleMaps()
+    }
+    
+    /// Prepare the Google maps SDK before launching
+    func initializeGoogleMaps() {
+        GMSServices.provideAPIKey("AIzaSyDTIcLAbEtz33aTZvAJrvY9VzKh6ItjE5s")
     }
 
     func applicationWillResignActive(application: UIApplication) {
