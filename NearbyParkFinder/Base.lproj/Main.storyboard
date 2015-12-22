@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Signika-Light.otf">
@@ -11,14 +12,13 @@
         <mutableArray key="Signika-Regular.otf">
             <string>Signika-Regular</string>
             <string>Signika-Regular</string>
-            <string>Signika-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
         <!--Location Verification View Controller-->
         <scene sceneID="829-VN-kvp">
             <objects>
-                <viewController id="jsi-3j-jNJ" customClass="LocationVerificationViewController" customModule="NearbyParkFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationVerificationViewController" id="jsi-3j-jNJ" customClass="LocationVerificationViewController" customModule="NearbyParkFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="igh-81-UnG"/>
                         <viewControllerLayoutGuide type="bottom" id="lhk-3y-i3k"/>
@@ -150,35 +150,37 @@
             </objects>
             <point key="canvasLocation" x="828" y="264"/>
         </scene>
-        <!--View Controller-->
+        <!--Find A Park-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NearbyParkFinder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="NearbyParkFinder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oid-la-UhQ">
-                                <rect key="frame" x="299" y="307" width="42" height="21"/>
-                                <fontDescription key="fontDescription" name="Signika-Regular" family="Signika" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ft0-Ee-cp0">
-                                <rect key="frame" x="308" y="224" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="jsi-3j-jNJ" kind="presentation" id="bCa-oc-Mhx"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zbF-Ty-tgd" userLabel="Map Region">
+                                <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.106306769" green="0.82194298509999997" blue="0.60250616069999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="zbF-Ty-tgd" secondAttribute="height" multiplier="1:1" id="5Tw-ll-MFD"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zbF-Ty-tgd" secondAttribute="trailing" id="QU7-7i-dVR"/>
+                            <constraint firstItem="zbF-Ty-tgd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gxi-yz-W0C"/>
+                            <constraint firstItem="zbF-Ty-tgd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kmY-Hb-rLN"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="efG-1j-7mB"/>
+                    <navigationItem key="navigationItem" title="Find A Park" id="efG-1j-7mB"/>
+                    <connections>
+                        <outlet property="mapRegionView" destination="zbF-Ty-tgd" id="s6t-1B-Zaf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -189,7 +191,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mow-Aa-5vw" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tww-bc-AqV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Tww-bc-AqV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

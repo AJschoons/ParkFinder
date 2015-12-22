@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import CoreLocation
+
+protocol LocationVerificationViewControllerDelegate: class {
+    func locationVerificationViewControllerDidGetLocation(location: CLLocation)
+}
+
+let LocationVerificationViewControllerIndentifier = "LocationVerificationViewController"
 
 /// Displays when location is unknown and handles resolving the issues and getting the location
 class LocationVerificationViewController: UIViewController {
 
+    weak var delegate: LocationVerificationViewControllerDelegate?
+    
     @IBOutlet weak var checkingLocationView: UIView!
     @IBOutlet weak var errorDescriptionLabel: UILabel!
     @IBOutlet weak var mainLabel: UILabel!
@@ -74,6 +83,7 @@ class LocationVerificationViewController: UIViewController {
     
     private func onFoundLocation() {
         dismissViewControllerAnimated(true, completion: nil)
+        delegate?.locationVerificationViewControllerDidGetLocation(locationVerificationManager.currentLocation!)
     }
 }
 

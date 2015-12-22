@@ -7,3 +7,4 @@
 //
 
 let kAppName = "Nearby Park Finder"
+let kMainStoryboardName = "Main"
