@@ -15,6 +15,7 @@ class MapViewController: UIViewController {
     private var googleMapView: GMSMapView!
     
     private var currentLocation: CLLocation?
+    private var currentLocationMarker: GMSMarker?
     
     private var returningFromLocationVerificationViewController = false
     
@@ -49,6 +50,11 @@ class MapViewController: UIViewController {
         guard let location = currentLocation else { return }
         let currentLocationCameraPosition = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 11)
         googleMapView.animateToCameraPosition(currentLocationCameraPosition)
+        
+        currentLocationMarker = GMSMarker(position: location.coordinate)
+        currentLocationMarker!.title = "Current Location";
+        currentLocationMarker!.icon = UIImage(named: kUserLocationMarkerImageName)
+        currentLocationMarker!.map = googleMapView;
     }
     
     private func onGotLocationFailure() {

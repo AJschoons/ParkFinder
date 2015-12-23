@@ -6,5 +6,9 @@
 //  Copyright © 2015 Adam Schoonmaker. All rights reserved.
 //
 
+// General
 let kAppName = "Nearby Park Finder"
 let kMainStoryboardName = "Main"
+
+// Images
+let kUserLocationMarkerImageName = "userLocationMarker"
