@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import SwiftyJSON
 
 class MapViewController: UIViewController {
     
@@ -16,6 +17,8 @@ class MapViewController: UIViewController {
     
     private var currentLocation: CLLocation?
     private var currentLocationMarker: GMSMarker?
+    private var nearbyParks = [Park]()
+    private var nearbyParkMarkers = [GMSMarker]()
     
     private var returningFromLocationVerificationViewController = false
     
@@ -50,11 +53,38 @@ class MapViewController: UIViewController {
         guard let location = currentLocation else { return }
         let currentLocationCameraPosition = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 11)
         googleMapView.animateToCameraPosition(currentLocationCameraPosition)
+        googleMapView.myLocationEnabled = true
         
-        currentLocationMarker = GMSMarker(position: location.coordinate)
-        currentLocationMarker!.title = "Current Location";
-        currentLocationMarker!.icon = UIImage(named: kUserLocationMarkerImageName)
-        currentLocationMarker!.map = googleMapView;
+        GooglePlacesClient.sharedClient.getPlacesNearbySearchParks(location, radius: 10000,
+            success: { [weak self] task, responseObject in
+                guard let strongSelf = self else { return }
+                guard let responseObject = responseObject else { return }
+                let json = JSON(responseObject)
+                guard let results = json["results"].array else { return }
+                strongSelf.createParksAndMarkersFromParkResultsJSON(results)
+            },
+            failure: defaultAFHTTPFailureBlock
+        )
+    }
+    
+    private func createParksAndMarkersFromParkResultsJSON(parkResultsJSON: [JSON]) {
+        // Create and store parks from JSON, create and store map markers from those parks
+        nearbyParks = []
+        nearbyParkMarkers = []
+        for parkJSON in parkResultsJSON {
+            do {
+                let park = try Park.initWithJSON(parkJSON)
+                nearbyParks.append(park)
+                
+                let marker = GMSMarker(position: park.location)
+                marker.title = park.name
+                marker.icon = UIImage(named: kParkLocationMarkerImageName)
+                marker.map = googleMapView
+                nearbyParkMarkers.append(marker)
+            } catch {
+                continue
+            }
+        }
     }
     
     private func onGotLocationFailure() {
@@ -76,12 +106,8 @@ class MapViewController: UIViewController {
     }
     
     private func initializeMapView() {
-        
         googleMapView = GMSMapView(frame: mapRegionView.bounds)
         mapRegionView.addSubview(googleMapView)
-        print(view.frame)
-        print(mapRegionView.bounds)
-        print(mapRegionView.frame)
         
         // Map should initially start centered in the continental United States
         let centerOfUnitedStates = CLLocationCoordinate2DMake(39.8282, -98.5795)

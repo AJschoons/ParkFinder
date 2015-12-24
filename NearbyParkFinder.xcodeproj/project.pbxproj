@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		4FF8D75CF7E7E30DB87E6EA6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FB502E85D356C3E068823B /* Pods.framework */; };
 		816560D31C29F1EC0049A4CF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560D21C29F1EC0049A4CF /* MapViewController.swift */; };
+		816560D51C2B8E250049A4CF /* GooglePlacesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560D41C2B8E250049A4CF /* GooglePlacesClient.swift */; };
+		816560D71C2B8EA10049A4CF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 816560D61C2B8EA10049A4CF /* Podfile */; };
+		816560D91C2B95EF0049A4CF /* NetworkingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560D81C2B95EF0049A4CF /* NetworkingHelpers.swift */; };
+		816560DE1C2BBCBE0049A4CF /* Park.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560DD1C2BBCBE0049A4CF /* Park.swift */; };
 		819341F81C28909D003CA883 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819341F71C28909D003CA883 /* AppDelegate.swift */; };
 		819341FD1C28909D003CA883 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 819341FB1C28909D003CA883 /* Main.storyboard */; };
 		819341FF1C28909D003CA883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 819341FE1C28909D003CA883 /* Assets.xcassets */; };
@@ -46,6 +50,10 @@
 		17FB502E85D356C3E068823B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		793CADC5243E66B8FDE21492 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		816560D21C29F1EC0049A4CF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		816560D41C2B8E250049A4CF /* GooglePlacesClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesClient.swift; sourceTree = "<group>"; };
+		816560D61C2B8EA10049A4CF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		816560D81C2B95EF0049A4CF /* NetworkingHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingHelpers.swift; sourceTree = "<group>"; };
+		816560DD1C2BBCBE0049A4CF /* Park.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Park.swift; sourceTree = "<group>"; };
 		819341F41C28909D003CA883 /* NearbyParkFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearbyParkFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819341F71C28909D003CA883 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		819341FC1C28909D003CA883 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +121,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		816560DC1C2BBC9D0049A4CF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				816560DD1C2BBCBE0049A4CF /* Park.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		819341EB1C28909D003CA883 = {
 			isa = PBXGroup;
 			children = (
@@ -138,7 +154,9 @@
 		819341F61C28909D003CA883 /* NearbyParkFinder */ = {
 			isa = PBXGroup;
 			children = (
+				816560D61C2B8EA10049A4CF /* Podfile */,
 				8193422E1C28BB5A003CA883 /* Resources */,
+				816560DC1C2BBC9D0049A4CF /* Models */,
 				819342251C28ABC6003CA883 /* Managers */,
 				819341F71C28909D003CA883 /* AppDelegate.swift */,
 				816560D21C29F1EC0049A4CF /* MapViewController.swift */,
@@ -173,8 +191,10 @@
 		819342251C28ABC6003CA883 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				816560D41C2B8E250049A4CF /* GooglePlacesClient.swift */,
 				819342261C28AC20003CA883 /* LocationManager.swift */,
 				8193423B1C28F058003CA883 /* LocationVerificationManager.swift */,
+				816560D81C2B95EF0049A4CF /* NetworkingHelpers.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -300,6 +320,7 @@
 			files = (
 				819342021C28909D003CA883 /* LaunchScreen.storyboard in Resources */,
 				819342351C28BBC4003CA883 /* Signika-Regular.otf in Resources */,
+				816560D71C2B8EA10049A4CF /* Podfile in Resources */,
 				819342361C28BBC4003CA883 /* Signika-Semibold.otf in Resources */,
 				819342341C28BBC4003CA883 /* Signika-Light.otf in Resources */,
 				819341FF1C28909D003CA883 /* Assets.xcassets in Resources */,
@@ -380,7 +401,10 @@
 				8193423A1C28D8DE003CA883 /* LocationVerificationViewController.swift in Sources */,
 				816560D31C29F1EC0049A4CF /* MapViewController.swift in Sources */,
 				8193423C1C28F058003CA883 /* LocationVerificationManager.swift in Sources */,
+				816560DE1C2BBCBE0049A4CF /* Park.swift in Sources */,
 				819341F81C28909D003CA883 /* AppDelegate.swift in Sources */,
+				816560D51C2B8E250049A4CF /* GooglePlacesClient.swift in Sources */,
+				816560D91C2B95EF0049A4CF /* NetworkingHelpers.swift in Sources */,
 				8193422D1C28B039003CA883 /* Strings.swift in Sources */,
 				819342271C28AC20003CA883 /* LocationManager.swift in Sources */,
 			);

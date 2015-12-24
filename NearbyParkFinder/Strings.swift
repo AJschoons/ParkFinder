@@ -9,6 +9,10 @@
 // General
 let kAppName = "Nearby Park Finder"
 let kMainStoryboardName = "Main"
+let kGMSServiceAPIKey = "AIzaSyDTIcLAbEtz33aTZvAJrvY9VzKh6ItjE5s"
 
 // Images
-let kUserLocationMarkerImageName = "userLocationMarker"
+let kParkLocationMarkerImageName = "parkLocationMarker"
+
+// API
+let kGooglePlacesAPIBaseURL = "https://maps.googleapis.com/maps/api/place/"

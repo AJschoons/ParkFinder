@@ -22,22 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Prepare the app before launching
     func initialize() {
-
-        for family: String in UIFont.familyNames()
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNamesForFamilyName(family)
-            {
-                print("== \(names)")
-            }
-        }
-        
         initializeGoogleMaps()
     }
     
     /// Prepare the Google maps SDK before launching
     func initializeGoogleMaps() {
-        GMSServices.provideAPIKey("AIzaSyDTIcLAbEtz33aTZvAJrvY9VzKh6ItjE5s")
+        GMSServices.provideAPIKey(kGMSServiceAPIKey)
     }
 
     func applicationWillResignActive(application: UIApplication) {
