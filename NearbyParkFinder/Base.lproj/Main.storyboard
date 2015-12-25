@@ -8,8 +8,10 @@
     <customFonts key="customFonts">
         <mutableArray key="Signika-Light.otf">
             <string>Signika-Light</string>
+            <string>Signika-Light</string>
         </mutableArray>
         <mutableArray key="Signika-Regular.otf">
+            <string>Signika-Regular</string>
             <string>Signika-Regular</string>
             <string>Signika-Regular</string>
         </mutableArray>
@@ -24,29 +26,29 @@
                         <viewControllerLayoutGuide type="bottom" id="lhk-3y-i3k"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MQ6-2o-Cl0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundPhone" translatesAutoresizingMaskIntoConstraints="NO" id="wUv-Da-bJP">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdA-hR-mzg">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AsA-3X-VPY">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsx-ad-pCB">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BvA-iC-9Lx">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Lr6-yj-JIi">
-                                                        <rect key="frame" x="180" y="0.0" width="240" height="600"/>
+                                                        <rect key="frame" x="67" y="0.0" width="240" height="667"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location services are needed to use this app" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLh-n4-sxx">
-                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="333.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="240" id="5cD-8f-aRA"/>
                                                                 </constraints>
@@ -55,13 +57,13 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIJ-tQ-KCv">
-                                                                <rect key="frame" x="0.0" y="300" width="240" height="300"/>
+                                                                <rect key="frame" x="0.0" y="333" width="240" height="333.5"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gXI-PE-CUF">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="333.5"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mW6-Ii-gJ4">
-                                                                                <rect key="frame" x="0.0" y="142" width="240" height="16"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Getting location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mW6-Ii-gJ4">
+                                                                                <rect key="frame" x="0.0" y="159" width="240" height="16"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="16" id="3BB-dI-j2n"/>
                                                                                 </constraints>
@@ -70,7 +72,7 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6rx-Ka-eWm">
-                                                                                <rect key="frame" x="110" y="165" width="20" height="20"/>
+                                                                                <rect key="frame" x="110" y="182" width="20" height="20"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="20" id="4hw-Cm-NEZ"/>
                                                                                     <constraint firstAttribute="width" constant="20" id="Eau-Xf-IMp"/>
@@ -97,7 +99,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some text that describes more about the problem" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vew-AD-IDd">
-                                                        <rect key="frame" x="15" y="0.0" width="570" height="600"/>
+                                                        <rect key="frame" x="15" y="0.0" width="345" height="667"/>
                                                         <fontDescription key="fontDescription" name="Signika-Regular" family="Signika" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -140,6 +142,7 @@
                             <constraint firstItem="lhk-3y-i3k" firstAttribute="top" secondItem="wUv-Da-bJP" secondAttribute="bottom" id="U1g-To-swS"/>
                         </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="checkingLocationView" destination="gXI-PE-CUF" id="YiS-hv-603"/>
                         <outlet property="errorDescriptionLabel" destination="Vew-AD-IDd" id="tvT-n2-fY0"/>
@@ -159,25 +162,36 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zbF-Ty-tgd" userLabel="Map Region">
-                                <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbF-Ty-tgd" userLabel="Map Region">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                 <color key="backgroundColor" red="0.106306769" green="0.82194298509999997" blue="0.60250616069999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="zbF-Ty-tgd" secondAttribute="height" multiplier="1:1" id="5Tw-ll-MFD"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z0Y-UA-7Hm">
+                                <rect key="frame" x="0.0" y="375" width="375" height="228"/>
+                                <connections>
+                                    <segue destination="wyD-yj-HnG" kind="embed" identifier="parkTableViewControllerEmbed" id="ot4-D4-g8h"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Z0Y-UA-7Hm" secondAttribute="bottom" id="6jj-nK-Wpp"/>
+                            <constraint firstItem="Z0Y-UA-7Hm" firstAttribute="top" secondItem="zbF-Ty-tgd" secondAttribute="bottom" id="Fcv-Kx-seB"/>
                             <constraint firstAttribute="trailing" secondItem="zbF-Ty-tgd" secondAttribute="trailing" id="QU7-7i-dVR"/>
+                            <constraint firstItem="Z0Y-UA-7Hm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="abZ-a1-wmY"/>
                             <constraint firstItem="zbF-Ty-tgd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gxi-yz-W0C"/>
                             <constraint firstItem="zbF-Ty-tgd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kmY-Hb-rLN"/>
+                            <constraint firstAttribute="trailing" secondItem="Z0Y-UA-7Hm" secondAttribute="trailing" id="xO9-dl-pCq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Find A Park" id="efG-1j-7mB"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="mapRegionView" destination="zbF-Ty-tgd" id="s6t-1B-Zaf"/>
                     </connections>
@@ -191,6 +205,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mow-Aa-5vw" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Tww-bc-AqV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -203,6 +218,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFK-ag-bri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="32" y="1022"/>
+        </scene>
+        <!--Park Table View Controller-->
+        <scene sceneID="eFc-Ko-utd">
+            <objects>
+                <tableViewController id="wyD-yj-HnG" customClass="ParkTableViewController" customModule="NearbyParkFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tNl-1o-TgN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="228"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="parkCell" textLabel="R6i-II-ghy" detailTextLabel="t81-P3-kwV" style="IBUITableViewCellStyleValue1" id="XcU-24-cd0">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XcU-24-cd0" id="lmg-vG-cMe">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R6i-II-ghy">
+                                            <rect key="frame" x="15" y="13" width="28.5" height="18.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Signika-Regular" family="Signika" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t81-P3-kwV">
+                                            <rect key="frame" x="322" y="13" width="38" height="18.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Signika-Light" family="Signika" pointSize="15"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wyD-yj-HnG" id="ytd-ZU-rZM"/>
+                            <outlet property="delegate" destination="wyD-yj-HnG" id="Dzb-3V-yp8"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qtL-Fr-iZ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="827.5" y="1578"/>
         </scene>
     </scenes>
     <resources>

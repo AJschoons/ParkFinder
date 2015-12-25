@@ -18,16 +18,20 @@ class Park {
     private(set) var name: String!
     private(set) var location: CLLocationCoordinate2D!
     private(set) var vicinity: String! // incomplete address from Google Places API
+    var distance: Double! // distance from current location in miles
     
-    class func initWithJSON(json: JSON) throws -> Park {
+    class func initWithJSON(json: JSON, currentLocation: CLLocation) throws -> Park {
         guard let name = json["name"].string, lat = json["geometry"]["location"]["lat"].double, lng = json["geometry"]["location"]["lng"].double, vicinity = json["vicinity"].string else {
             throw ParkError.InsufficientJSONInformationForInitialization
         }
         
         let park = Park()
         park.name = name
-        park.location = CLLocationCoordinate2DMake(lat, lng)
         park.vicinity = vicinity
+        
+        let location = CLLocation(latitude: lat, longitude: lng)
+        park.location = location.coordinate
+        park.distance = (location.distanceFromLocation(currentLocation) * 0.00062137) // convert meters to miles
         
         //
         //        JSON is formatted like this
