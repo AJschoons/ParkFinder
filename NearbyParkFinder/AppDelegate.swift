@@ -23,11 +23,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Prepare the app before launching
     func initialize() {
         initializeGoogleMaps()
+        customizeAppearance()
     }
     
     /// Prepare the Google maps SDK before launching
     func initializeGoogleMaps() {
         GMSServices.provideAPIKey(kGMSServiceAPIKey)
+    }
+    
+    func customizeAppearance() {
+        // customize navigation bar
+        UINavigationBar.appearance().barTintColor = primaryGreen4
+        UINavigationBar.appearance().barStyle = .Black
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
     }
 
     func applicationWillResignActive(application: UIApplication) {

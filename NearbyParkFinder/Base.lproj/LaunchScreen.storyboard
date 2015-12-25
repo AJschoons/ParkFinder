@@ -14,14 +14,43 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SJJ-nJ-zcd">
+                                <rect key="frame" x="120" y="233" width="135" height="200"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jF4-wT-DR9">
+                                        <rect key="frame" x="0.0" y="0.0" width="135" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="THX-ea-AtD"/>
+                                            <constraint firstAttribute="width" constant="135" id="fLN-Fi-tAf"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="jF4-wT-DR9" secondAttribute="bottom" id="3Bw-sW-a3a"/>
+                                    <constraint firstAttribute="trailing" secondItem="jF4-wT-DR9" secondAttribute="trailing" id="8xS-7P-ytM"/>
+                                    <constraint firstItem="jF4-wT-DR9" firstAttribute="top" secondItem="SJJ-nJ-zcd" secondAttribute="top" id="9Rt-Lu-jWT"/>
+                                    <constraint firstItem="jF4-wT-DR9" firstAttribute="leading" secondItem="SJJ-nJ-zcd" secondAttribute="leading" id="ihr-rH-IkK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.066666666666666666" green="0.40000000000000002" blue="0.066666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="SJJ-nJ-zcd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="CRa-hL-w8j"/>
+                            <constraint firstItem="SJJ-nJ-zcd" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="c1e-8S-rtp"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launchScreenLogo" width="135" height="200"/>
+    </resources>
 </document>

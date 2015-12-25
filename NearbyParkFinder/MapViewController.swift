@@ -24,9 +24,13 @@ class MapViewController: UIViewController {
     
     private var returningFromLocationVerificationViewController = false
     
+    private var mapHasGottenInitialLocation = false
     private var mapIsAnimatingFromGettingLocation = false
     
     private let parkLocationMarkerImage = UIImage(named: kParkLocationMarkerImageName)
+    
+    private var lastLocationParksSearchedFrom: CLLocation?
+    private var radiusUsedForLastParkSearch: Int?
     
     
     private let minMapZoom: Float = 11
@@ -39,6 +43,10 @@ class MapViewController: UIViewController {
         }
         
         googleMapView.frame = mapRegionView.frame
+    }
+    
+    override func viewDidLoad() {
+        view.backgroundColor = primaryGreen2
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -237,5 +245,10 @@ extension MapViewController: GMSMapViewDelegate {
             mapIsAnimatingFromGettingLocation = false
             searchForNearbyParks()
         }
+    }
+    
+    /// Called repeatedly during any animations or gestures on the map (or once, if the camera is explicitly set)
+    func mapView(mapView: GMSMapView!, didChangeCameraPosition position: GMSCameraPosition!) {
+        // TODO: update parks while scrolling
     }
 }

@@ -36,11 +36,14 @@ extension ParkTableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kParkCellIdentifier)
-        guard let parkDataSource = parkDataSource, parkCell = cell else { return UITableViewCell() }
+        guard let parkDataSource = parkDataSource, parkCell = cell as? ParkTableViewCell else { return UITableViewCell() }
+        
         let park = parkDataSource.getParks()[indexPath.row]
-        parkCell.textLabel?.text = park.name
+        parkCell.parkNameLabel.text = park.name
         let distanceRoundedToTenthsPlace = Double(round(park.distance * 10) / 10)
-        parkCell.detailTextLabel?.text = "\(distanceRoundedToTenthsPlace) mi"
+        parkCell.parkDistanceLabel.text = "\(distanceRoundedToTenthsPlace) mi"
+        parkCell.backgroundColor = primaryGreen2
+        
         return parkCell
     }
     
