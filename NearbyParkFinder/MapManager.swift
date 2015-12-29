@@ -60,7 +60,7 @@ class MapManager: NSObject {
     private let parkSelectionMinZoom: Float = 13
     
     /// The multiplier for radius of visible map to search
-    private let radiusSearchMultiplier = 1.2
+    private let radiusSearchMultiplier = 1.3
     
     /// The change in zoom where the parks should be loaded again
     private let zoomChangeRequiringParkUpdate: Float = 0.7
@@ -218,7 +218,7 @@ class MapManager: NSObject {
     private func parksShouldUpdateFromMapPositionChange() -> Bool {
         guard let lastParkSearchInformation = lastParkSearchInformation where state == .Updated else { return false }
         
-        let distanceFromLastSearchThatUpdateIsNeeded = Double(lastParkSearchInformation.radius / 2)
+        let distanceFromLastSearchThatUpdateIsNeeded = Double(lastParkSearchInformation.radius) * 0.75
         let mapCenter = getMapCenterCoordinate()
         let mapCenterLocation = CLLocation(latitude: mapCenter.latitude, longitude: mapCenter.longitude)
         let currentDistanceFromLastSearch = mapCenterLocation.distanceFromLocation(lastParkSearchInformation.location)
