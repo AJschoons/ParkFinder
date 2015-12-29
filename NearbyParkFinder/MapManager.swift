@@ -53,7 +53,7 @@ class MapManager: NSObject {
     private let initialMapZoom: Float = 3
     
     // The multiplier for radius of visible map to search
-    private let radiusSearchMultiplier = 1.5
+    private let radiusSearchMultiplier = 1.3
     
     private let parkLocationMarkerImage = UIImage(named: kParkLocationMarkerImageName)
     

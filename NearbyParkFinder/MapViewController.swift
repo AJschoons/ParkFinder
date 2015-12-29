@@ -19,8 +19,6 @@ class MapViewController: UIViewController {
     
     private var currentLocation: CLLocation?
     
-    private var returningFromLocationVerificationViewController = false
-    
     override func viewDidLayoutSubviews() {
         if mapManager.googleMapView == nil {
             mapManager.onMapRegionSuperviewViewDidLayoutSubviews()
@@ -41,9 +39,6 @@ class MapViewController: UIViewController {
         if currentLocation == nil {
             // Get the location before showing this view controller
             presentLocationVerificationViewController()
-        } else if returningFromLocationVerificationViewController {
-            returningFromLocationVerificationViewController = false
-            onGotLocationSuccess()
         }
     }
     
@@ -65,7 +60,11 @@ class MapViewController: UIViewController {
         let storyboard = UIStoryboard(name: kMainStoryboardName, bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier(LocationVerificationViewControllerIndentifier)
         guard let lvvc = vc as? LocationVerificationViewController else { return }
+        
         lvvc.delegate = self
+        lvvc.modalTransitionStyle = .CrossDissolve
+        lvvc.modalPresentationStyle = .OverFullScreen
+        
         presentViewController(lvvc, animated: true, completion: nil)
     }
     
@@ -93,6 +92,7 @@ extension MapViewController {
     
     private func onGotLocationSuccess() {
         // Called when found location or returning from location verification view controller
+        // TODO: handle updating location
         
         mapManager.onGotLocation()
     }
@@ -124,7 +124,7 @@ extension MapViewController: LocationVerificationViewControllerDelegate {
     func locationVerificationViewControllerDidGetLocation(location: CLLocation) {
         // Need to wait until view is visible before animating
         currentLocation = location
-        returningFromLocationVerificationViewController = true
+        onGotLocationSuccess()
     }
 }
 
