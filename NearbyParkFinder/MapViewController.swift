@@ -140,7 +140,6 @@ extension MapViewController: ParkTableViewControllerDelegate {
     // MARK: ParkTableViewControllerDelegate
     
     func parkTableViewController(parkTableViewController: ParkTableViewController, didSelectParkWithRow row: Int) {
-        let park = mapManager.nearbyParks[row]
-        mapManager.onParkSelected(park)
+        mapManager.onParkSelectedWithIndex(row)
     }
 }

@@ -21,8 +21,6 @@ enum MapState {
 
 protocol MapManagerLocationSource: class {
     func getCurrentLocation() -> CLLocation?
-    //func gotLocation()
-    //func updatedLocation()
 }
 
 protocol MapManagerDelegate: class {
@@ -31,6 +29,13 @@ protocol MapManagerDelegate: class {
 
 /// Manages the google map
 class MapManager: NSObject {
+    
+    /// Information relevant to park searches used to check whether parks should be updated
+    struct ParkSearchInformation {
+        var location: CLLocation
+        var radius: Int
+        var zoom: Float
+    }
     
     weak var locationSource: MapManagerLocationSource?
     weak var delegate: MapManagerDelegate?
@@ -43,19 +48,25 @@ class MapManager: NSObject {
     
     private(set) var state: MapState = .Created
     
-    private var lastLocationParksSearchedFrom: CLLocation?
-    private var radiusUsedForLastParkSearch: Int?
+    private var lastParkSearchInformation: ParkSearchInformation?
     
     private var mapIsAnimatingFromGettingInitialLocation = false
+    private var mapIsAnimatingFromSelectingLocation = false
+    private var mapIsAnimatingFromTappingOnMarker = false
     
     private let minMapZoom: Float = 11
-    private let maxMapZoom: Float = 13
+    private let maxMapZoom: Float = 15
     private let initialMapZoom: Float = 3
+    private let parkSelectionMinZoom: Float = 13
     
-    // The multiplier for radius of visible map to search
-    private let radiusSearchMultiplier = 1.3
+    /// The multiplier for radius of visible map to search
+    private let radiusSearchMultiplier = 1.2
     
-    private let parkLocationMarkerImage = UIImage(named: kParkLocationMarkerImageName)
+    /// The change in zoom where the parks should be loaded again
+    private let zoomChangeRequiringParkUpdate: Float = 0.7
+    
+    private let markerParkLocationImage = UIImage(named: kParkLocationMarkerImageName)
+    private let markerSnippet = "Tap here for more info"
     
     init(viewToPlaceMapIn: UIView) {
         super.init()
@@ -126,17 +137,36 @@ class MapManager: NSObject {
         setState(.ParksNeedUpdating)
     }
     
-    func onParkSelected(park: Park) {
-        let selectedParkCameraPosition = GMSCameraPosition.cameraWithLatitude(park.location.latitude, longitude: park.location.longitude, zoom: maxMapZoom)
+    private func onFinishedAnimatingAfterParkSelection() {
+        guard state == .Updated else { return }
+        setState(.ParksNeedUpdating)
+    }
+    
+    func onParkSelectedWithIndex(index: Int) {
+        let park = nearbyParks[index]
+        googleMapView.selectedMarker = nearbyParkMarkers[index]
+        
+        // Zoom in to at least the parkSelectionMinZoom, but if already zoomed farther then stay at same zoom
+        let parkSelectionZoom = max(googleMapView.camera.zoom, parkSelectionMinZoom)
+        
+        let selectedParkCameraPosition = GMSCameraPosition.cameraWithLatitude(park.location.latitude, longitude: park.location.longitude, zoom: parkSelectionZoom)
+        mapIsAnimatingFromSelectingLocation = true
         googleMapView.animateToCameraPosition(selectedParkCameraPosition)
+    }
+    
+    private func onParksNeedUpdatingFromMapPositionChange() {
+        guard state == .Updated else { return }
+        setState(.ParksNeedUpdating)
     }
     
     // MARK: Helpers
     
     private func updateParks() {
-        guard let location = locationSource?.getCurrentLocation() else { return }
+        let center = getMapCenterCoordinate()
+        let centerLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
         let radiusToSearch = Int(Double(getMapRadiusInMeters()) * radiusSearchMultiplier)
-        searchForNearbyParksFromLocation(location, withRadius: radiusToSearch)
+        
+        searchForNearbyParksFromLocation(centerLocation, withRadius: radiusToSearch)
     }
     
     func initializeMapView() {
@@ -158,13 +188,12 @@ class MapManager: NSObject {
         googleMapView.myLocationEnabled = true
         googleMapView.setMinZoom(minMapZoom, maxZoom: maxMapZoom)
         
-        let currentLocationCameraPosition = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: minMapZoom)
-        googleMapView.animateToCameraPosition(currentLocationCameraPosition)
-        
         // Wait until the map has finished animating before changing state to updating parks
         // so that the search radius can be calculated from the map
         // This will happen in the idleAtCameraPosition GMSMapViewDelegate function
+        let currentLocationCameraPosition = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: minMapZoom)
         mapIsAnimatingFromGettingInitialLocation = true
+        googleMapView.animateToCameraPosition(currentLocationCameraPosition)
     }
     
     private func getMapRadiusInMeters() -> Int {
@@ -186,10 +215,29 @@ class MapManager: NSObject {
         return googleMapView.projection.coordinateForPoint(topCenterPoint)
     }
     
+    private func parksShouldUpdateFromMapPositionChange() -> Bool {
+        guard let lastParkSearchInformation = lastParkSearchInformation where state == .Updated else { return false }
+        
+        let distanceFromLastSearchThatUpdateIsNeeded = Double(lastParkSearchInformation.radius / 2)
+        let mapCenter = getMapCenterCoordinate()
+        let mapCenterLocation = CLLocation(latitude: mapCenter.latitude, longitude: mapCenter.longitude)
+        let currentDistanceFromLastSearch = mapCenterLocation.distanceFromLocation(lastParkSearchInformation.location)
+        let shouldUpdateFromDistanceChange = currentDistanceFromLastSearch > distanceFromLastSearchThatUpdateIsNeeded
+        
+        let zoomChangeFromLastSearch = abs(lastParkSearchInformation.zoom - googleMapView.camera.zoom)
+        let shouldUpdateFromZoomChange = zoomChangeFromLastSearch > zoomChangeRequiringParkUpdate
+        
+        return shouldUpdateFromDistanceChange || shouldUpdateFromZoomChange
+    }
+    
+    private func shouldNotUpdateParksDuringMapPositionChange() -> Bool {
+        return mapIsAnimatingFromGettingInitialLocation || mapIsAnimatingFromSelectingLocation || mapIsAnimatingFromTappingOnMarker
+    }
+    
     // MARK: Networking
     
     private func searchForNearbyParksFromLocation(location: CLLocation, withRadius radius: Int) {
-        guard let location = locationSource?.getCurrentLocation() else { return }
+        lastParkSearchInformation = ParkSearchInformation(location: location, radius: radius, zoom: googleMapView.camera.zoom)
     
         GooglePlacesClient.sharedClient.getPlacesNearbySearchParks(location, radius: radius,
             success: { [weak self] task, responseObject in
@@ -224,7 +272,8 @@ class MapManager: NSObject {
                 
                 let marker = GMSMarker(position: park.location)
                 marker.title = park.name
-                marker.icon = parkLocationMarkerImage
+                marker.snippet = markerSnippet
+                marker.icon = markerParkLocationImage
                 marker.map = googleMapView
                 nearbyParkMarkers.append(marker)
             } catch {
@@ -245,11 +294,28 @@ extension MapManager: GMSMapViewDelegate {
             // Now get the nearby parks since we can get the radius from the animated map
             mapIsAnimatingFromGettingInitialLocation = false
             onFinishedAnimatingToInitialMapLocation()
+            
+        } else if mapIsAnimatingFromSelectingLocation {
+            mapIsAnimatingFromSelectingLocation = false
+            //onFinishedAnimatingAfterParkSelection()
+            
+        } else if mapIsAnimatingFromTappingOnMarker {
+            mapIsAnimatingFromTappingOnMarker = false
         }
+    }
+    
+    /// Called after a marker has been tapped.
+    func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
+        mapIsAnimatingFromTappingOnMarker = true
+        return false
     }
     
     /// Called repeatedly during any animations or gestures on the map (or once, if the camera is explicitly set)
     func mapView(mapView: GMSMapView!, didChangeCameraPosition position: GMSCameraPosition!) {
-        // TODO: update parks while scrolling
+        guard shouldNotUpdateParksDuringMapPositionChange() == false else { return }
+        
+        if parksShouldUpdateFromMapPositionChange() {
+            onParksNeedUpdatingFromMapPositionChange()
+        }
     }
 }
