@@ -46,6 +46,8 @@ class LocationVerificationManager: NSObject {
         NSTimer.scheduledTimerWithTimeInterval(StateServicePeriod, target: self, selector: "serviceState", userInfo: nil, repeats: true)
     }
     
+    // MARK: State management
+    
     private func setState(newState: LocationVerificationManagerState) {
         state = newState
         stateTime = 0.0
@@ -106,9 +108,7 @@ class LocationVerificationManager: NSObject {
         }
     }
     
-    private func isSearchingForLocation() -> Bool {
-        return state == .SearchingForLocation || state == .SearchingForLocationExtended
-    }
+    // MARK: Events
     
     /// Location has an error event
     private func onLocationError() {
@@ -125,6 +125,8 @@ class LocationVerificationManager: NSObject {
         if !isSearchingForLocation() { setState(.SearchingForLocation) }
     }
     
+    // MARK: Helpers
+    
     private func searchForLocation() {
         LocationManager.sharedManager.getLocation(
             success: { [weak self] location, accuracy in
@@ -138,5 +140,9 @@ class LocationVerificationManager: NSObject {
                 strongSelf.onLocationError()
             }
         )
+    }
+    
+    private func isSearchingForLocation() -> Bool {
+        return state == .SearchingForLocation || state == .SearchingForLocationExtended
     }
 }
