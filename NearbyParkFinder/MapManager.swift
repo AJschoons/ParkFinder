@@ -237,6 +237,7 @@ class MapManager: NSObject {
     // MARK: Networking
     
     private func searchForNearbyParksFromLocation(location: CLLocation, withRadius radius: Int) {
+        guard let currentLocation = locationSource?.getCurrentLocation() else { return }
         lastParkSearchInformation = ParkSearchInformation(location: location, radius: radius, zoom: googleMapView.camera.zoom)
     
         GooglePlacesClient.sharedClient.getPlacesNearbySearchParks(location, radius: radius,
@@ -246,7 +247,11 @@ class MapManager: NSObject {
                 let json = JSON(responseObject)
                 guard let results = json["results"].array else { return }
                 
-                strongSelf.updateParksAndMarkersFromParkResultsJSON(results)
+                dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                    guard let strongSelf = self else { return }
+                    strongSelf.updateParksAndMarkersFromParkResultsJSON(results, withCurrentLocation: currentLocation)
+                })
+                
                 strongSelf.onUpdatedParks()
                 strongSelf.delegate?.mapManager(strongSelf, didUpdateWithParks: strongSelf.nearbyParks)
             },
@@ -254,32 +259,61 @@ class MapManager: NSObject {
         )
     }
     
-    private func updateParksAndMarkersFromParkResultsJSON(parkResultsJSON: [JSON]) {
-        guard let location = locationSource?.getCurrentLocation() else { return }
+    private func updateParksAndMarkersFromParkResultsJSON(parkResultsJSON: [JSON], withCurrentLocation currentLocation: CLLocation) {
+        objc_sync_enter(nearbyParks)
+        objc_sync_enter(nearbyParkMarkers)
+        objc_sync_enter(googleMapView)
         
-        // Clear out the old park markers
-        for parkMarker in nearbyParkMarkers {
-            parkMarker.map = nil
+        let selectedMarker = googleMapView.selectedMarker
+        var selectedPark: Park!
+        
+        // Clear out the old park markers, except the selected one
+        for (index, parkMarker) in nearbyParkMarkers.enumerate() {
+            if selectedMarker != nil && parkMarker == selectedMarker {
+                selectedPark = nearbyParks[index]
+            } else {
+                parkMarker.map = nil
+            }
         }
         
+        //
         // Create and store parks from JSON, create and store map markers from those parks
+        //
+        
         nearbyParks = []
         nearbyParkMarkers = []
+        
+        // If a marker was selected then have that be the first listed, and don't have it removed
+        if selectedPark != nil && selectedMarker != nil {
+            nearbyParks.append(selectedPark)
+            nearbyParkMarkers.append(selectedMarker)
+        }
+        
         for parkJSON in parkResultsJSON {
             do {
-                let park = try Park.initWithJSON(parkJSON, currentLocation: location)
-                nearbyParks.append(park)
+                let park = try Park.initWithJSON(parkJSON, currentLocation: currentLocation)
                 
-                let marker = GMSMarker(position: park.location)
-                marker.title = park.name
-                marker.snippet = markerSnippet
-                marker.icon = markerParkLocationImage
-                marker.map = googleMapView
-                nearbyParkMarkers.append(marker)
+                // If there was a selected marker kept, don't add it again
+                if selectedPark != nil && selectedMarker != nil && selectedPark.id == park.id {
+                    continue
+                } else {
+                    nearbyParks.append(park)
+                    
+                    let marker = GMSMarker(position: park.location)
+                    marker.title = park.name
+                    marker.snippet = markerSnippet
+                    marker.icon = markerParkLocationImage
+                    marker.map = googleMapView
+                    nearbyParkMarkers.append(marker)
+                }
             } catch {
                 continue
             }
         }
+        
+        objc_sync_exit(nearbyParks)
+        objc_sync_exit(nearbyParkMarkers)
+        objc_sync_exit(googleMapView)
     }
 }
 
@@ -297,10 +331,11 @@ extension MapManager: GMSMapViewDelegate {
             
         } else if mapIsAnimatingFromSelectingLocation {
             mapIsAnimatingFromSelectingLocation = false
-            //onFinishedAnimatingAfterParkSelection()
+            onFinishedAnimatingAfterParkSelection()
             
         } else if mapIsAnimatingFromTappingOnMarker {
             mapIsAnimatingFromTappingOnMarker = false
+            onFinishedAnimatingAfterParkSelection()
         }
     }
     
