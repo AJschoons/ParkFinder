@@ -25,6 +25,7 @@ protocol MapManagerLocationSource: class {
 
 protocol MapManagerDelegate: class {
     func mapManager(mapManager: MapManager, didUpdateWithParks parks: [Park])
+    func mapManager(mapManager: MapManager, didTapOnInfoWindowOfPark park: Park)
 }
 
 /// Manages the google map
@@ -351,6 +352,13 @@ extension MapManager: GMSMapViewDelegate {
         
         if parksShouldUpdateFromMapPositionChange() {
             onParksNeedUpdatingFromMapPositionChange()
+        }
+    }
+    
+    /// Called after a marker's info window has been tapped
+    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+        if let index = nearbyParkMarkers.indexOf(marker) {
+            delegate?.mapManager(self, didTapOnInfoWindowOfPark: nearbyParks[index])
         }
     }
 }

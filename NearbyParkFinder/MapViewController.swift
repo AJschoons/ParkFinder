@@ -23,8 +23,6 @@ class MapViewController: UIViewController {
         if mapManager.googleMapView == nil {
             mapManager.onMapRegionSuperviewViewDidLayoutSubviews()
         }
-        
-        mapManager.googleMapView.frame = mapRegionView.frame
     }
     
     override func viewDidLoad() {
@@ -37,8 +35,13 @@ class MapViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         if currentLocation == nil {
-            // Get the location before showing this view controller
-            presentLocationVerificationViewController()
+            if simulateLocation {
+                currentLocation = CLLocation(latitude: 42.735841, longitude: -84.491479)
+                onGotLocationSuccess()
+            } else {
+                // Get the location before showing this view controller
+                presentLocationVerificationViewController()
+            }
         }
     }
     
@@ -58,7 +61,7 @@ class MapViewController: UIViewController {
     /// Creates a LocationVerificationViewController from the storyboard and presents it
     private func presentLocationVerificationViewController() {
         let storyboard = UIStoryboard(name: kMainStoryboardName, bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier(LocationVerificationViewControllerIndentifier)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(LocationVerificationViewControllerIdentifier)
         guard let lvvc = vc as? LocationVerificationViewController else { return }
         
         lvvc.delegate = self
@@ -66,6 +69,11 @@ class MapViewController: UIViewController {
         lvvc.modalPresentationStyle = .OverFullScreen
         
         presentViewController(lvvc, animated: true, completion: nil)
+    }
+    
+    /// Creates a ParkDetailsViewController from the storyboard and presents it
+    private func presentParkDetailsViewController() {
+        performSegueWithIdentifier(kPresentParkDetailsViewControllerSegueIdentifier, sender: nil)
     }
     
     private func reloadParkTableViewControllerParkData() {
@@ -115,6 +123,30 @@ extension MapViewController: MapManagerDelegate {
     
     func mapManager(mapManager: MapManager, didUpdateWithParks parks: [Park]) {
         reloadParkTableViewControllerParkData()
+    }
+    
+    func mapManager(mapManager: MapManager, didTapOnInfoWindowOfPark park: Park) {
+        
+        placesClient.lookUpPlaceID(park.id,
+            callback: { [weak self] (place: GMSPlace?, error: NSError?) in
+                guard let strongSelf = self else { return }
+                
+                if let error = error {
+                    print("lookup place id query error: \(error.localizedDescription)")
+                    return
+                }
+                
+                if let place = place {
+                    print("Place name \(place.name)")
+                    print("Place address \(place.formattedAddress)")
+                    print("Place placeID \(place.placeID)")
+                    print("Place attributions \(place.attributions)")
+                    
+                    strongSelf.presentParkDetailsViewController()
+                } else {
+                    print("No place details for \(park.id)")
+                }
+        })
     }
 }
 

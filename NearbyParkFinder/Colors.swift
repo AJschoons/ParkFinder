@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Lighter to darker
 let primaryGreen1 = UIColor(rgba: "#88CC88")
 let primaryGreen2 = UIColor(rgba: "#55AA55")
 let primaryGreen3 = UIColor(rgba: "#2D882D")

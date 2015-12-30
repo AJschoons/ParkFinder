@@ -9,11 +9,13 @@
 import GoogleMaps
 import UIKit
 
+private(set) var placesClient: GMSPlacesClient!
+let simulateLocation = true
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         initialize()
@@ -29,14 +31,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Prepare the Google maps SDK before launching
     func initializeGoogleMaps() {
         GMSServices.provideAPIKey(kGMSServiceAPIKey)
+        placesClient = GMSPlacesClient()
     }
     
     func customizeAppearance() {
-        // customize navigation bar
+        // Navigation bar
         UINavigationBar.appearance().barTintColor = primaryGreen4
         UINavigationBar.appearance().barStyle = .Black
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: kSignikaSemiboldFontName, size: 17)!]
+        
+        // Bar button item
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: kSignikaLightFontName, size: 17)!], forState: UIControlState.Normal)
     }
 
     func applicationWillResignActive(application: UIApplication) {

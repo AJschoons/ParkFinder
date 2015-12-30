@@ -13,7 +13,7 @@ protocol LocationVerificationViewControllerDelegate: class {
     func locationVerificationViewControllerDidGetLocation(location: CLLocation)
 }
 
-let LocationVerificationViewControllerIndentifier = "LocationVerificationViewController"
+let LocationVerificationViewControllerIdentifier = "LocationVerificationViewController"
 
 /// Displays when location is unknown and handles resolving the issues and getting the location
 class LocationVerificationViewController: UIViewController {

@@ -23,7 +23,7 @@ class Park {
     
     
     class func initWithJSON(json: JSON, currentLocation: CLLocation) throws -> Park {
-        guard let id = json["id"].string, name = json["name"].string, lat = json["geometry"]["location"]["lat"].double, lng = json["geometry"]["location"]["lng"].double, vicinity = json["vicinity"].string else {
+        guard let id = json["place_id"].string, name = json["name"].string, lat = json["geometry"]["location"]["lat"].double, lng = json["geometry"]["location"]["lng"].double, vicinity = json["vicinity"].string else {
             throw ParkError.InsufficientJSONInformationForInitialization
         }
         

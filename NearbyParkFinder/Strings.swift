@@ -12,6 +12,12 @@ let kGooglePlacesAPIBaseURL = "https://maps.googleapis.com/maps/api/place/"
 // Cell indentifiers
 let kParkCellIdentifier = "parkCell"
 
+// Fonts
+let kSignikaLightFontName = "Signika-Light"
+let kSignikaRegularFontName = "Signika-Regular"
+let kSignikaSemiboldFontName = "Signika-Semibold"
+let kSignikaBoldFontName = "Signika-Bold"
+
 // General
 let kAppName = "Nearby Park Finder"
 let kMainStoryboardName = "Main"
@@ -22,3 +28,4 @@ let kParkLocationMarkerImageName = "parkLocationMarker"
 
 // Storyboard segues
 let kParkTableViewControllerEmbedSegueIdentifier = "parkTableViewControllerEmbed"
+let kPresentParkDetailsViewControllerSegueIdentifier = "presentParkDetailsViewController"

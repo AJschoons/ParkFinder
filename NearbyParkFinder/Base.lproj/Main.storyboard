@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Mow-Aa-5vw">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -198,15 +197,64 @@
                             <constraint firstAttribute="trailing" secondItem="Z0Y-UA-7Hm" secondAttribute="trailing" id="xO9-dl-pCq"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Find A Park" id="efG-1j-7mB"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="mapRegionView" destination="zbF-Ty-tgd" id="s6t-1B-Zaf"/>
+                        <segue destination="UfX-3S-wEG" kind="presentation" identifier="presentParkDetailsViewController" id="fD6-Q6-0wt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="828" y="1022"/>
+        </scene>
+        <!--Park Details-->
+        <scene sceneID="ocz-aQ-Lse">
+            <objects>
+                <viewController storyboardIdentifier="ParkDetailsViewController" id="kol-oi-zWV" customClass="ParkDetailsViewController" customModule="NearbyParkFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YUU-p7-d0e"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hni-6O-Jgh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="igS-Jg-HWo">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ISL-fB-yzG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="kol-oi-zWV" id="tGn-ho-aTc"/>
+                                    <outlet property="delegate" destination="kol-oi-zWV" id="FsH-ln-gYd"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ISL-fB-yzG" secondAttribute="trailing" id="8ez-Jq-Zxp"/>
+                            <constraint firstItem="Hni-6O-Jgh" firstAttribute="top" secondItem="ISL-fB-yzG" secondAttribute="bottom" id="JPy-Ck-2Yt"/>
+                            <constraint firstItem="ISL-fB-yzG" firstAttribute="top" secondItem="YUU-p7-d0e" secondAttribute="bottom" id="Q9Y-p0-3gg"/>
+                            <constraint firstItem="ISL-fB-yzG" firstAttribute="leading" secondItem="igS-Jg-HWo" secondAttribute="leading" id="mmo-LW-F89"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Park Details" id="Qwm-T9-YpP">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="WkV-6c-9Kn"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="VJe-U6-IXi">
+                            <connections>
+                                <action selector="onBackButton:" destination="kol-oi-zWV" id="8OQ-YH-xVY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="parkDetailsTable" destination="ISL-fB-yzG" id="dP4-U4-6Rf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kkw-xQ-2HV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1824.5" y="1021.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1tg-9d-uvH">
@@ -225,7 +273,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFK-ag-bri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32" y="1022"/>
+            <point key="canvasLocation" x="327.5" y="1021.5"/>
         </scene>
         <!--Park Table View Controller-->
         <scene sceneID="eFc-Ko-utd">
@@ -297,6 +345,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qtL-Fr-iZ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="827.5" y="1578"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mCk-6n-7h6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UfX-3S-wEG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="h1Q-dI-w3R">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kol-oi-zWV" kind="relationship" relationship="rootViewController" id="MyE-jL-5bU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8N0-uJ-1rV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1319.5" y="1021.5"/>
         </scene>
     </scenes>
     <resources>
