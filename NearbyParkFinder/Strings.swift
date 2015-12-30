@@ -11,6 +11,7 @@ let kGooglePlacesAPIBaseURL = "https://maps.googleapis.com/maps/api/place/"
 
 // Cell indentifiers
 let kParkCellIdentifier = "parkCell"
+let kParkInformationCellIdentifier = "parkInformationCell"
 
 // Fonts
 let kSignikaLightFontName = "Signika-Light"

@@ -19,6 +19,8 @@ class MapViewController: UIViewController {
     
     private var currentLocation: CLLocation?
     
+    private var placeToShowDetailsFor: GMSPlace?
+    
     override func viewDidLayoutSubviews() {
         if mapManager.googleMapView == nil {
             mapManager.onMapRegionSuperviewViewDidLayoutSubviews()
@@ -54,7 +56,11 @@ class MapViewController: UIViewController {
             parkTableViewController = destination
             parkTableViewController.parkDataSource = self
             parkTableViewController.delegate = self
+        } else if identifier == kPresentParkDetailsViewControllerSegueIdentifier {
+            guard let nav = segue.destinationViewController as? UINavigationController else { return }
+            guard let place = placeToShowDetailsFor, destination = nav.viewControllers[0] as? ParkDetailsViewController else { return }
             
+            destination.place = place
         }
     }
     
@@ -72,7 +78,8 @@ class MapViewController: UIViewController {
     }
     
     /// Creates a ParkDetailsViewController from the storyboard and presents it
-    private func presentParkDetailsViewController() {
+    private func presentParkDetailsViewControllerWithPlace(place: GMSPlace) {
+        placeToShowDetailsFor = place
         performSegueWithIdentifier(kPresentParkDetailsViewControllerSegueIdentifier, sender: nil)
     }
     
@@ -142,7 +149,7 @@ extension MapViewController: MapManagerDelegate {
                     print("Place placeID \(place.placeID)")
                     print("Place attributions \(place.attributions)")
                     
-                    strongSelf.presentParkDetailsViewController()
+                    strongSelf.presentParkDetailsViewControllerWithPlace(place)
                 } else {
                     print("No place details for \(park.id)")
                 }
