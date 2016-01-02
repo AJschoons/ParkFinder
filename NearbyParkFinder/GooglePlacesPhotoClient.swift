@@ -1,16 +1,16 @@
 //
-//  GooglePlacesClient.swift
+//  GooglePlacesPhotoClient.swift
 //  NearbyParkFinder
 //
-//  Created by adam on 12/23/15.
-//  Copyright © 2015 Adam Schoonmaker. All rights reserved.
+//  Created by adam on 1/2/16.
+//  Copyright © 2016 Adam Schoonmaker. All rights reserved.
 //
 
 import AFNetworking
 import CoreLocation
 import Foundation
 
-class GooglePlacesClient {
+class GooglePlacesPhotoClient {
     
     lazy var urlSessionManager: AFURLSessionManager = {
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -20,30 +20,29 @@ class GooglePlacesClient {
     lazy var httpSessionManager: AFHTTPSessionManager = {
         let manager = AFHTTPSessionManager(baseURL: NSURL(string: kGooglePlacesAPIBaseURL))
         manager.requestSerializer = AFJSONRequestSerializer()
-        manager.responseSerializer = AFJSONResponseSerializer()
+        manager.responseSerializer = AFImageResponseSerializer()
         return manager
     }()
     
-    class var sharedClient: GooglePlacesClient {
+    class var sharedClient: GooglePlacesPhotoClient {
         struct Static {
-            static let client = GooglePlacesClient()
+            static let client = GooglePlacesPhotoClient()
         }
         return Static.client
     }
     
-    func getPlacesNearbySearchParks(location: CLLocation, radius: Int, extraAttempts: Int = defaultExtraNetworkingAttempts, success: AFHTTPSuccessBlock, failure: AFHTTPFailureBlock) {
+    func getPhotoForPlaceWithPhotoReference(photoReference: String, maxWidth: Int, extraAttempts: Int = defaultExtraNetworkingAttempts, success: AFHTTPSuccessBlock, failure: AFHTTPFailureBlock) {
         
-        let urlString = "\(kGooglePlacesAPIBaseURL)nearbysearch/json?"
+        let urlString = "\(kGooglePlacesAPIBaseURL)photo?"
         
         var params = Dictionary<String, AnyObject>()
         params.updateValue(kGMSServiceAPIKey, forKey: "key")
-        params.updateValue("\(location.coordinate.latitude),\(location.coordinate.longitude)", forKey: "location")
-        params.updateValue(radius, forKey: "radius")
-        params.updateValue("park", forKey: "types")
-
+        params.updateValue(photoReference, forKey: "photoreference")
+        params.updateValue(maxWidth, forKey: "maxwidth")
+        
         let failureWithExtraAttempt: AFHTTPFailureBlock = { task, error in
             if errorShouldBeHandledWithRepeatedRequest(error, attemptsLeft: extraAttempts) {
-                self.getPlacesNearbySearchParks(location, radius: radius, extraAttempts: (extraAttempts - 1), success: success, failure: failure)
+                self.getPhotoForPlaceWithPhotoReference(photoReference, maxWidth: maxWidth, extraAttempts: (extraAttempts - 1), success: success, failure: failure)
             } else {
                 failure!(task: task, error: error)
             }
@@ -51,4 +50,5 @@ class GooglePlacesClient {
         
         httpSessionManager.GET(urlString, parameters: params, progress: nil, success: success, failure: failureWithExtraAttempt)
     }
+    
 }

@@ -19,7 +19,7 @@ class MapViewController: UIViewController {
     
     private var currentLocation: CLLocation?
     
-    private var placeToShowDetailsFor: GMSPlace?
+    private var parkDetailsForSelectedPark: ParkDetails?
     
     override func viewDidLayoutSubviews() {
         if mapManager.googleMapView == nil {
@@ -58,9 +58,9 @@ class MapViewController: UIViewController {
             parkTableViewController.delegate = self
         } else if identifier == kPresentParkDetailsViewControllerSegueIdentifier {
             guard let nav = segue.destinationViewController as? UINavigationController else { return }
-            guard let place = placeToShowDetailsFor, destination = nav.viewControllers[0] as? ParkDetailsViewController else { return }
+            guard let parkDetails = parkDetailsForSelectedPark, destination = nav.viewControllers[0] as? ParkDetailsViewController else { return }
             
-            destination.place = place
+            destination.parkDetails = parkDetails
             destination.currentLocation = currentLocation
         }
     }
@@ -79,8 +79,8 @@ class MapViewController: UIViewController {
     }
     
     /// Creates a ParkDetailsViewController from the storyboard and presents it
-    private func presentParkDetailsViewControllerWithPlace(place: GMSPlace) {
-        placeToShowDetailsFor = place
+    private func presentParkDetailsViewControllerWithParkDetails(parkDetails: ParkDetails) {
+        parkDetailsForSelectedPark = parkDetails
         performSegueWithIdentifier(kPresentParkDetailsViewControllerSegueIdentifier, sender: nil)
     }
     
@@ -150,7 +150,7 @@ extension MapViewController: MapManagerDelegate {
                     print("Place placeID \(place.placeID)")
                     print("Place attributions \(place.attributions)")
                     
-                    strongSelf.presentParkDetailsViewControllerWithPlace(place)
+                    strongSelf.presentParkDetailsViewControllerWithParkDetails(ParkDetails(place: place, photoReference: park.photoReference))
                 } else {
                     print("No place details for \(park.id)")
                 }

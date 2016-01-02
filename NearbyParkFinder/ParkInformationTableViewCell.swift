@@ -9,13 +9,10 @@
 import UIKit
 
 enum ParkInformationTableViewCellType {
-    case Name, Open, Address, Phone, Website, Attributions
+    case Name, Open, Address, Phone, Website, Photo, Attributions
 }
 
 class ParkInformationTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var informationTypeLabel: UILabel!
-    @IBOutlet weak var informationDetailsLabel: UILabel!
     
     var type: ParkInformationTableViewCellType!
 }

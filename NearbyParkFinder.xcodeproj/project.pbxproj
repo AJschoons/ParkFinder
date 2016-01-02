@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4FF8D75CF7E7E30DB87E6EA6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FB502E85D356C3E068823B /* Pods.framework */; };
 		811DF30D1C3491BB00A3EC55 /* ParkInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811DF30C1C3491BB00A3EC55 /* ParkInformationTableViewCell.swift */; };
+		811DF3111C385CA400A3EC55 /* ParkInformationLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811DF3101C385CA400A3EC55 /* ParkInformationLabelTableViewCell.swift */; };
 		816560D31C29F1EC0049A4CF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560D21C29F1EC0049A4CF /* MapViewController.swift */; };
 		816560D51C2B8E250049A4CF /* GooglePlacesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560D41C2B8E250049A4CF /* GooglePlacesClient.swift */; };
 		816560D71C2B8EA10049A4CF /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 816560D61C2B8EA10049A4CF /* Podfile */; };
@@ -20,6 +21,8 @@
 		816560E91C2CFA040049A4CF /* ParkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560E81C2CFA040049A4CF /* ParkTableViewCell.swift */; };
 		816560EB1C2D9FF20049A4CF /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560EA1C2D9FF20049A4CF /* MapManager.swift */; };
 		816560ED1C3364C80049A4CF /* ParkDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560EC1C3364C80049A4CF /* ParkDetailsViewController.swift */; };
+		818426861C385F93007860CA /* ParkInformationPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818426851C385F93007860CA /* ParkInformationPhotoTableViewCell.swift */; };
+		818426881C386AA8007860CA /* GooglePlacesPhotoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818426871C386AA8007860CA /* GooglePlacesPhotoClient.swift */; };
 		819341F81C28909D003CA883 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819341F71C28909D003CA883 /* AppDelegate.swift */; };
 		819341FD1C28909D003CA883 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 819341FB1C28909D003CA883 /* Main.storyboard */; };
 		819341FF1C28909D003CA883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 819341FE1C28909D003CA883 /* Assets.xcassets */; };
@@ -57,6 +60,7 @@
 		17FB502E85D356C3E068823B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		793CADC5243E66B8FDE21492 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		811DF30C1C3491BB00A3EC55 /* ParkInformationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkInformationTableViewCell.swift; sourceTree = "<group>"; };
+		811DF3101C385CA400A3EC55 /* ParkInformationLabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkInformationLabelTableViewCell.swift; sourceTree = "<group>"; };
 		816560D21C29F1EC0049A4CF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		816560D41C2B8E250049A4CF /* GooglePlacesClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesClient.swift; sourceTree = "<group>"; };
 		816560D61C2B8EA10049A4CF /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -68,6 +72,8 @@
 		816560E81C2CFA040049A4CF /* ParkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkTableViewCell.swift; sourceTree = "<group>"; };
 		816560EA1C2D9FF20049A4CF /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		816560EC1C3364C80049A4CF /* ParkDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkDetailsViewController.swift; sourceTree = "<group>"; };
+		818426851C385F93007860CA /* ParkInformationPhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkInformationPhotoTableViewCell.swift; sourceTree = "<group>"; };
+		818426871C386AA8007860CA /* GooglePlacesPhotoClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesPhotoClient.swift; sourceTree = "<group>"; };
 		819341F41C28909D003CA883 /* NearbyParkFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearbyParkFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819341F71C28909D003CA883 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		819341FC1C28909D003CA883 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -140,6 +146,8 @@
 			children = (
 				816560EC1C3364C80049A4CF /* ParkDetailsViewController.swift */,
 				811DF30C1C3491BB00A3EC55 /* ParkInformationTableViewCell.swift */,
+				811DF3101C385CA400A3EC55 /* ParkInformationLabelTableViewCell.swift */,
+				818426851C385F93007860CA /* ParkInformationPhotoTableViewCell.swift */,
 			);
 			name = "Park Details";
 			sourceTree = "<group>";
@@ -241,6 +249,7 @@
 			children = (
 				819341F71C28909D003CA883 /* AppDelegate.swift */,
 				816560D41C2B8E250049A4CF /* GooglePlacesClient.swift */,
+				818426871C386AA8007860CA /* GooglePlacesPhotoClient.swift */,
 				819342261C28AC20003CA883 /* LocationManager.swift */,
 				8193423B1C28F058003CA883 /* LocationVerificationManager.swift */,
 				816560EA1C2D9FF20049A4CF /* MapManager.swift */,
@@ -459,6 +468,9 @@
 				816560EB1C2D9FF20049A4CF /* MapManager.swift in Sources */,
 				8193423C1C28F058003CA883 /* LocationVerificationManager.swift in Sources */,
 				816560E21C2C62AF0049A4CF /* ParkTableViewController.swift in Sources */,
+				818426881C386AA8007860CA /* GooglePlacesPhotoClient.swift in Sources */,
+				811DF3111C385CA400A3EC55 /* ParkInformationLabelTableViewCell.swift in Sources */,
+				818426861C385F93007860CA /* ParkInformationPhotoTableViewCell.swift in Sources */,
 				816560ED1C3364C80049A4CF /* ParkDetailsViewController.swift in Sources */,
 				816560DE1C2BBCBE0049A4CF /* Park.swift in Sources */,
 				819341F81C28909D003CA883 /* AppDelegate.swift in Sources */,
