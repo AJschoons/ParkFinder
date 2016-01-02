@@ -42,6 +42,11 @@ class ParkDetailsViewController: UIViewController {
         parkDetailsTable.estimatedRowHeight = estimatedRowHeight
     }
     
+    override func viewDidAppear(animated: Bool) {
+        // Makes sure the row heights are correctly calculated
+        parkDetailsTable.reloadData()
+    }
+    
     // MARK: Helper
     
     /// Setup the ParkInformationTableViewCell based on its type
