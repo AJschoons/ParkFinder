@@ -6,6 +6,7 @@ use_frameworks!
 pod 'AFNetworking'
 pod 'GoogleMaps'
 pod 'INTULocationManager'
+pod 'OpenInGoogleMaps'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 
 target 'NearbyParkFinder' do

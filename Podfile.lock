@@ -16,12 +16,14 @@ PODS:
     - AFNetworking/NSURLSession
   - GoogleMaps (1.11.1)
   - INTULocationManager (4.1.1)
+  - OpenInGoogleMaps (0.1.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - AFNetworking
   - GoogleMaps
   - INTULocationManager
+  - OpenInGoogleMaps
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -37,6 +39,7 @@ SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   GoogleMaps: c947160008f414c66707a5ea60f35e92055c7670
   INTULocationManager: 83c7373048d583cda57e25eefb9bb8a3675acf16
+  OpenInGoogleMaps: 60dd887d2e2b2149166a03bd6dab1d4478a7d3e8
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

@@ -7,6 +7,7 @@
 //
 
 import GoogleMaps
+import OpenInGoogleMaps
 import UIKit
 
 let ParkDetailsViewControllerIdentifier = "ParkDetailsViewController"
@@ -20,6 +21,8 @@ class ParkDetailsViewController: UIViewController {
             decideInformationTypesToShowForPlace(place)
         }
     }
+    
+    var currentLocation: CLLocation!
     
     /// The types of information to be shown for the place
     private var informationTypesToShow = [ParkInformationTableViewCellType]()
@@ -92,6 +95,30 @@ class ParkDetailsViewController: UIViewController {
         if place.website?.absoluteString.characters.count > 0 { informationTypesToShow.append(.Website) }
         if place.attributions?.length > 0 { informationTypesToShow.append(.Attributions) }
     }
+    
+    private func onAddressSelected() {
+        guard let address = place?.formattedAddress, location = currentLocation else { return }
+        
+        let directions = GoogleDirectionsDefinition()
+        directions.startingPoint = GoogleDirectionsWaypoint(location: location.coordinate)
+        directions.destinationPoint = GoogleDirectionsWaypoint(query: address)
+        OpenInGoogleMapsController.sharedInstance().openDirections(directions)
+    }
+    
+    private func onPhoneSelected() {
+        guard let phoneNumber = place?.phoneNumber else { return }
+        
+        let phoneNumberReducedToOnlyNumbers = phoneNumber.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet).joinWithSeparator("")
+        
+        if let phoneURL = NSURL(string: "telprompt://\(phoneNumberReducedToOnlyNumbers)") {
+            UIApplication.sharedApplication().openURL(phoneURL)
+        }
+    }
+    
+    private func onWebsiteSelected() {
+        guard let website = place?.website else { return }
+        UIApplication.sharedApplication().openURL(website)
+    }
 }
 
 extension ParkDetailsViewController: UITableViewDataSource {
@@ -113,5 +140,25 @@ extension ParkDetailsViewController: UITableViewDataSource {
 }
 
 extension ParkDetailsViewController: UITableViewDelegate {
+    // MARK: UITableViewDelegate
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let parkInfoCell = tableView.cellForRowAtIndexPath(indexPath) as? ParkInformationTableViewCell else { return }
+        guard let parkInfoCellType = parkInfoCell.type else { return }
+        
+        switch parkInfoCellType {
+            
+        case .Address:
+            onAddressSelected()
+            
+        case .Phone:
+            onPhoneSelected()
+            
+        case .Website:
+            onWebsiteSelected()
+            
+        default:
+            return
+        }
+    }
 }

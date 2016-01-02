@@ -61,6 +61,7 @@ class MapViewController: UIViewController {
             guard let place = placeToShowDetailsFor, destination = nav.viewControllers[0] as? ParkDetailsViewController else { return }
             
             destination.place = place
+            destination.currentLocation = currentLocation
         }
     }
     

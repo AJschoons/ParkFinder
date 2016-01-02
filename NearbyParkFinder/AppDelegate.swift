@@ -7,6 +7,7 @@
 //
 
 import GoogleMaps
+import OpenInGoogleMaps
 import UIKit
 
 private(set) var placesClient: GMSPlacesClient!
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Prepare the app before launching
     func initialize() {
         initializeGoogleMaps()
+        initializeOpenInGoogleMapsController()
         customizeAppearance()
     }
     
@@ -43,6 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Bar button item
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
         UIBarButtonItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: kSignikaLightFontName, size: 17)!], forState: UIControlState.Normal)
+    }
+    
+    func initializeOpenInGoogleMapsController() {
+        OpenInGoogleMapsController.sharedInstance().fallbackStrategy = GoogleMapsFallback.AppleMaps
     }
 
     func applicationWillResignActive(application: UIApplication) {
