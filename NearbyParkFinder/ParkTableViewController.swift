@@ -20,6 +20,12 @@ class ParkTableViewController: UITableViewController {
     
     weak var parkDataSource: ParkTableViewControllerParkDataSource?
     weak var delegate: ParkTableViewControllerDelegate?
+    
+    /// Reloads the table and animates the table to be scrolled to the first cell
+    func reloadParkData() {
+        tableView.reloadData()
+        tableView.setContentOffset(CGPointMake(0, 0 - tableView.contentInset.top), animated: true)
+    }
 }
 
 extension ParkTableViewController {

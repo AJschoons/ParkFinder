@@ -90,7 +90,7 @@ class MapViewController: UIViewController {
     }
     
     private func reloadParkTableViewControllerParkData() {
-        parkTableViewController.tableView.reloadData()
+        parkTableViewController.reloadParkData()
     }
 }
 
