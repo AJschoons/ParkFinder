@@ -200,7 +200,13 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Find A Park" id="efG-1j-7mB"/>
+                    <navigationItem key="navigationItem" title="Find A Park" id="efG-1j-7mB">
+                        <barButtonItem key="leftBarButtonItem" title="My Location" id="SV0-fk-SPf">
+                            <connections>
+                                <action selector="onMyLocationButton:" destination="BYZ-38-t0r" id="eEO-rT-IK6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="mapRegionView" destination="zbF-Ty-tgd" id="s6t-1B-Zaf"/>

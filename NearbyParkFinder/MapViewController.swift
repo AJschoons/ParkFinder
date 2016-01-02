@@ -21,6 +21,11 @@ class MapViewController: UIViewController {
     
     private var parkDetailsForSelectedPark: ParkDetails?
     
+    
+    @IBAction func onMyLocationButton(sender: AnyObject) {
+        mapManager.onAnimateToCurrentLocation()
+    }
+    
     override func viewDidLayoutSubviews() {
         if mapManager.googleMapView == nil {
             mapManager.onMapRegionSuperviewViewDidLayoutSubviews()

@@ -54,6 +54,7 @@ class MapManager: NSObject {
     private var mapIsAnimatingFromGettingInitialLocation = false
     private var mapIsAnimatingFromSelectingLocation = false
     private var mapIsAnimatingFromTappingOnMarker = false
+    private var mapIsAnimatingToCurrentLocation = false
     
     private let minMapZoom: Float = 11
     private let maxMapZoom: Float = 15
@@ -143,6 +144,11 @@ class MapManager: NSObject {
         setState(.ParksNeedUpdating)
     }
     
+    private func onFinishedAnimatingToCurrentLocation() {
+        guard state == .Updated else { return }
+        setState(.ParksNeedUpdating)
+    }
+    
     func onParkSelectedWithIndex(index: Int) {
         let park = nearbyParks[index]
         googleMapView.selectedMarker = nearbyParkMarkers[index]
@@ -153,6 +159,15 @@ class MapManager: NSObject {
         let selectedParkCameraPosition = GMSCameraPosition.cameraWithLatitude(park.location.latitude, longitude: park.location.longitude, zoom: parkSelectionZoom)
         mapIsAnimatingFromSelectingLocation = true
         googleMapView.animateToCameraPosition(selectedParkCameraPosition)
+    }
+    
+    /// Animates to current location at current zoom level
+    func onAnimateToCurrentLocation() {
+        guard let currentLocation = locationSource?.getCurrentLocation() else { return }
+        
+        let currentPosition = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, zoom: googleMapView.camera.zoom)
+        mapIsAnimatingToCurrentLocation = true
+        googleMapView.animateToCameraPosition(currentPosition)
     }
     
     private func onParksNeedUpdatingFromMapPositionChange() {
@@ -232,7 +247,7 @@ class MapManager: NSObject {
     }
     
     private func shouldNotUpdateParksDuringMapPositionChange() -> Bool {
-        return mapIsAnimatingFromGettingInitialLocation || mapIsAnimatingFromSelectingLocation || mapIsAnimatingFromTappingOnMarker
+        return mapIsAnimatingFromGettingInitialLocation || mapIsAnimatingFromSelectingLocation || mapIsAnimatingFromTappingOnMarker || mapIsAnimatingToCurrentLocation
     }
     
     // MARK: Networking
@@ -324,6 +339,10 @@ extension MapManager: GMSMapViewDelegate {
     /// Called when the map becomes idle, after any outstanding gestures or animations have completed (or after the camera has been explicitly set).
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
         
+        //
+        // Don't load parks until camera finished moving for the conditions below
+        //
+        
         if mapIsAnimatingFromGettingInitialLocation {
             // Map has finished animating to current location
             // Now get the nearby parks since we can get the radius from the animated map
@@ -337,6 +356,10 @@ extension MapManager: GMSMapViewDelegate {
         } else if mapIsAnimatingFromTappingOnMarker {
             mapIsAnimatingFromTappingOnMarker = false
             onFinishedAnimatingAfterParkSelection()
+            
+        } else if mapIsAnimatingToCurrentLocation {
+            mapIsAnimatingToCurrentLocation = false
+            onFinishedAnimatingToCurrentLocation()
         }
     }
     
