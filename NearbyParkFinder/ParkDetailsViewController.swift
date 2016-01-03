@@ -17,7 +17,8 @@ struct ParkDetails {
     var photoReference: String?
 }
 
-class ParkDetailsViewController: UIViewController {
+/// Shows details of a selected park
+class ParkDetailsViewController: PFViewController {
 
     @IBOutlet weak var parkDetailsTable: UITableView!
     
@@ -42,6 +43,8 @@ class ParkDetailsViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         view.backgroundColor = primaryGreen2
         parkDetailsTable.separatorColor = primaryGreen1
         
@@ -53,6 +56,8 @@ class ParkDetailsViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
         // Makes sure the row heights are correctly calculated
         parkDetailsTable.reloadData()
     }
@@ -232,6 +237,21 @@ extension ParkDetailsViewController: UITableViewDelegate {
             
         default:
             return
+        }
+    }
+}
+
+extension ParkDetailsViewController {
+    // MARK: NetworkReachabilityVerificationViewControllerDelegate
+    
+    override func networkReachabilityVerificationViewControllerDidVerifyReachability() {
+        super.networkReachabilityVerificationViewControllerDidVerifyReachability()
+        
+        // Now that network reachability has been reestablished, ensure the park image has been loaded
+        if parkImage == nil {
+            getParkPhoto()
+        } else {
+            parkDetailsTable.reloadData()
         }
     }
 }

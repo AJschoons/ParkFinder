@@ -6,11 +6,13 @@
 //  Copyright © 2015 Adam Schoonmaker. All rights reserved.
 //
 
+import AFNetworking
 import GoogleMaps
 import SwiftyJSON
 import UIKit
 
-class MapViewController: UIViewController {
+/// View controller for the main park finding map interactions
+class MapViewController: PFViewController {
     
     private var parkTableViewController: ParkTableViewController!
     private var mapManager: MapManager!
@@ -24,12 +26,16 @@ class MapViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         if mapManager.googleMapView == nil {
             mapManager.onMapRegionSuperviewViewDidLayoutSubviews()
         }
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         mapManager = MapManager(viewToPlaceMapIn: mapRegionView)
         mapManager.delegate = self
         
@@ -37,16 +43,13 @@ class MapViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        do {
-            try CurrentLocationManager.sharedManager.getCurrentLocation()
-            
-            if simulateLocation {
-                onCurrentLocationManagerInitializationSuccess()
-            }
-        } catch {
-            // Get the current location before showing this view controller
-            presentLocationVerificationViewController()
-        }
+        super.viewDidAppear(animated)
+        
+        // If the NetworkReachabilityVerificationViewController is showing then
+        // wait until network is available before verifying location availability
+        guard !isShowingNetworkReachabilityVerificationViewController else { return }
+        
+        verifyInitialLocationAvailable()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -85,6 +88,20 @@ class MapViewController: UIViewController {
         performSegueWithIdentifier(kPresentParkDetailsViewControllerSegueIdentifier, sender: nil)
     }
     
+    /// Attempts getting current location, and presents LocationVerificationViewController if not available
+    private func verifyInitialLocationAvailable() {
+        do {
+            try CurrentLocationManager.sharedManager.getCurrentLocation()
+            
+            if simulateLocation {
+                onCurrentLocationManagerInitializationSuccess()
+            }
+        } catch {
+            // Get the current location before showing this view controller
+            presentLocationVerificationViewController()
+        }
+    }
+    
     private func reloadParkTableViewControllerParkData() {
         parkTableViewController.reloadParkData()
     }
@@ -100,7 +117,7 @@ extension MapViewController {
 }
 
 extension MapViewController: MapManagerDelegate {
-    // MARK: MapManagerLocationSource
+    // MARK: MapManagerDelegate
     
     func mapManager(mapManager: MapManager, didUpdateWithParks parks: [Park]) {
         reloadParkTableViewControllerParkData()
@@ -108,6 +125,7 @@ extension MapViewController: MapManagerDelegate {
     
     func mapManager(mapManager: MapManager, didTapOnInfoWindowOfPark park: Park) {
         
+        // TODO: handle these errors with an alert
         placesClient.lookUpPlaceID(park.id,
             callback: { [weak self] (place: GMSPlace?, error: NSError?) in
                 guard let strongSelf = self else { return }
@@ -125,7 +143,7 @@ extension MapViewController: MapManagerDelegate {
                     
                     strongSelf.presentParkDetailsViewControllerWithParkDetails(ParkDetails(place: place, photoReference: park.photoReference))
                 } else {
-                    print("No place details for \(park.id)")
+                    print("No place details for \(park.name)")
                 }
         })
     }
@@ -153,5 +171,16 @@ extension MapViewController: ParkTableViewControllerDelegate {
     
     func parkTableViewController(parkTableViewController: ParkTableViewController, didSelectParkWithRow row: Int) {
         mapManager.onParkSelectedWithIndex(row)
+    }
+}
+
+extension MapViewController {
+    // MARK: NetworkReachabilityVerificationViewControllerDelegate
+    
+    override func networkReachabilityVerificationViewControllerDidVerifyReachability() {
+        super.networkReachabilityVerificationViewControllerDidVerifyReachability()
+        
+        // Now that network reachability has been verified, verify an initial location is available
+        verifyInitialLocationAvailable()
     }
 }

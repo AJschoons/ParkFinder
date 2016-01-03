@@ -28,6 +28,10 @@ let kGMSServiceAPIKey = "AIzaSyDTIcLAbEtz33aTZvAJrvY9VzKh6ItjE5s"
 // Images
 let kParkLocationMarkerImageName = "parkLocationMarker"
 
+// Notifications
+let kNetworkReachabilityChangedToNotReachableNotification = "NetworkReachabilityChangedToNotReachable"
+let kNetworkReachabilityChangedToReachableNotification = "NetworkReachabilityChangedToReachable"
+
 // Storyboard segues
 let kParkTableViewControllerEmbedSegueIdentifier = "parkTableViewControllerEmbed"
 let kPresentParkDetailsViewControllerSegueIdentifier = "presentParkDetailsViewController"

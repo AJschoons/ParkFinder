@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4FF8D75CF7E7E30DB87E6EA6 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FB502E85D356C3E068823B /* Pods.framework */; };
+		81092D221C39A08000349584 /* NetworkReachabilityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81092D211C39A07F00349584 /* NetworkReachabilityVerificationViewController.swift */; };
+		81092D241C39C82E00349584 /* PFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81092D231C39C82E00349584 /* PFViewController.swift */; };
 		811DF30D1C3491BB00A3EC55 /* ParkInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811DF30C1C3491BB00A3EC55 /* ParkInformationTableViewCell.swift */; };
 		811DF3111C385CA400A3EC55 /* ParkInformationLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811DF3101C385CA400A3EC55 /* ParkInformationLabelTableViewCell.swift */; };
 		816560D31C29F1EC0049A4CF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816560D21C29F1EC0049A4CF /* MapViewController.swift */; };
@@ -60,6 +62,8 @@
 /* Begin PBXFileReference section */
 		17FB502E85D356C3E068823B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		793CADC5243E66B8FDE21492 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		81092D211C39A07F00349584 /* NetworkReachabilityVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityVerificationViewController.swift; sourceTree = "<group>"; };
+		81092D231C39C82E00349584 /* PFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFViewController.swift; sourceTree = "<group>"; };
 		811DF30C1C3491BB00A3EC55 /* ParkInformationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkInformationTableViewCell.swift; sourceTree = "<group>"; };
 		811DF3101C385CA400A3EC55 /* ParkInformationLabelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkInformationLabelTableViewCell.swift; sourceTree = "<group>"; };
 		816560D21C29F1EC0049A4CF /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +147,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		81092D251C39DC1000349584 /* Base Classes */ = {
+			isa = PBXGroup;
+			children = (
+				81092D231C39C82E00349584 /* PFViewController.swift */,
+			);
+			name = "Base Classes";
+			sourceTree = "<group>";
+		};
 		811DF3091C34877600A3EC55 /* Park Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,10 +177,12 @@
 		816560DF1C2C5D850049A4CF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				81092D251C39DC1000349584 /* Base Classes */,
 				819342001C28909D003CA883 /* LaunchScreen.storyboard */,
 				819342391C28D8DE003CA883 /* LocationVerificationViewController.swift */,
 				819341FB1C28909D003CA883 /* Main.storyboard */,
 				816560E01C2C611F0049A4CF /* Main Map */,
+				81092D211C39A07F00349584 /* NetworkReachabilityVerificationViewController.swift */,
 				811DF3091C34877600A3EC55 /* Park Details */,
 			);
 			name = UI;
@@ -471,7 +485,9 @@
 				816560EB1C2D9FF20049A4CF /* MapManager.swift in Sources */,
 				8193423C1C28F058003CA883 /* LocationVerificationManager.swift in Sources */,
 				816560E21C2C62AF0049A4CF /* ParkTableViewController.swift in Sources */,
+				81092D221C39A08000349584 /* NetworkReachabilityVerificationViewController.swift in Sources */,
 				818426881C386AA8007860CA /* GooglePlacesPhotoClient.swift in Sources */,
+				81092D241C39C82E00349584 /* PFViewController.swift in Sources */,
 				811DF3111C385CA400A3EC55 /* ParkInformationLabelTableViewCell.swift in Sources */,
 				818426861C385F93007860CA /* ParkInformationPhotoTableViewCell.swift in Sources */,
 				816560ED1C3364C80049A4CF /* ParkDetailsViewController.swift in Sources */,

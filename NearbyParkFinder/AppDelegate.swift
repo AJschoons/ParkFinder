@@ -6,6 +6,7 @@
 //  Copyright © 2015 Adam Schoonmaker. All rights reserved.
 //
 
+import AFNetworking
 import GoogleMaps
 import OpenInGoogleMaps
 import UIKit
@@ -23,8 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    /// Prepare the app before launching
+    /// Prepares the app before launching
     func initialize() {
+        setupAFNetworkMonitoring()
         initializeGoogleMaps()
         initializeOpenInGoogleMapsController()
         customizeAppearance()
@@ -50,6 +52,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initializeOpenInGoogleMapsController() {
         OpenInGoogleMapsController.sharedInstance().fallbackStrategy = GoogleMapsFallback.AppleMaps
     }
+    
+    func setupAFNetworkMonitoring() {
+        AFNetworkReachabilityManager.sharedManager().startMonitoring()
+        
+        // Start showing network activity
+        AFNetworkActivityIndicatorManager.sharedManager().enabled = true
+        
+        // Post notifications on reachability changes
+        AFNetworkReachabilityManager.sharedManager().setReachabilityStatusChangeBlock({ reachability in
+            if (reachability == AFNetworkReachabilityStatus.ReachableViaWiFi) || (reachability == AFNetworkReachabilityStatus.ReachableViaWWAN) {
+                NSNotificationCenter.defaultCenter().postNotificationName(kNetworkReachabilityChangedToReachableNotification, object: nil)
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName(kNetworkReachabilityChangedToNotReachableNotification, object: nil)
+            }
+        })
+    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -72,7 +90,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

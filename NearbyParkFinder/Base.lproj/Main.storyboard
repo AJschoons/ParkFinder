@@ -10,8 +10,11 @@
             <string>Signika-Light</string>
             <string>Signika-Light</string>
             <string>Signika-Light</string>
+            <string>Signika-Light</string>
         </mutableArray>
         <mutableArray key="Signika-Regular.otf">
+            <string>Signika-Regular</string>
+            <string>Signika-Regular</string>
             <string>Signika-Regular</string>
             <string>Signika-Regular</string>
             <string>Signika-Regular</string>
@@ -153,7 +156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgB-3V-OWo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="828" y="264"/>
+            <point key="canvasLocation" x="595.5" y="239.5"/>
         </scene>
         <!--Find A Park-->
         <scene sceneID="tne-QT-ifu">
@@ -436,6 +439,137 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8N0-uJ-1rV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1319.5" y="1021.5"/>
+        </scene>
+        <!--Network Reachability Verification View Controller-->
+        <scene sceneID="ghp-oQ-vK1">
+            <objects>
+                <viewController storyboardIdentifier="NetworkReachabilityVerificationViewController" id="Afw-Xd-ncd" customClass="NetworkReachabilityVerificationViewController" customModule="NearbyParkFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Heu-k9-oCw"/>
+                        <viewControllerLayoutGuide type="bottom" id="dt6-r7-bpl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xsr-Jw-oMN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundPhone" translatesAutoresizingMaskIntoConstraints="NO" id="0AV-JP-4KD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pJ-Wk-SdX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WFJ-3H-odi">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7L-PR-pgW">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XXI-TY-yG0">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kzN-pc-4fB">
+                                                        <rect key="frame" x="67" y="0.0" width="240" height="667"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An internet connection is needed to use this app" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="be8-A1-baO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="240" height="333.5"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="240" id="hZY-Y2-LdR"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Signika-Regular" family="Signika" pointSize="21"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nqX-tl-zA2">
+                                                                <rect key="frame" x="0.0" y="333" width="240" height="333.5"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tf-2g-4VK">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="333.5"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtO-vz-fbf">
+                                                                                <rect key="frame" x="0.0" y="159" width="240" height="16"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="16" id="YsH-gQ-e9e"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="Signika-Light" family="Signika" pointSize="14"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="a0D-wF-CV3">
+                                                                                <rect key="frame" x="110" y="182" width="20" height="20"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="20" id="E7o-ED-NNx"/>
+                                                                                    <constraint firstAttribute="width" constant="20" id="ELv-gW-3H0"/>
+                                                                                </constraints>
+                                                                            </activityIndicatorView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="a0D-wF-CV3" firstAttribute="top" secondItem="jtO-vz-fbf" secondAttribute="bottom" constant="7" id="5CJ-Vw-wdV"/>
+                                                                            <constraint firstItem="jtO-vz-fbf" firstAttribute="leading" secondItem="8tf-2g-4VK" secondAttribute="leading" id="Hep-8i-GRH"/>
+                                                                            <constraint firstItem="jtO-vz-fbf" firstAttribute="centerY" secondItem="8tf-2g-4VK" secondAttribute="centerY" id="YF0-hU-IWY"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="jtO-vz-fbf" secondAttribute="trailing" id="fKF-Hv-csr"/>
+                                                                            <constraint firstItem="a0D-wF-CV3" firstAttribute="centerX" secondItem="jtO-vz-fbf" secondAttribute="centerX" id="v3A-be-Dh0"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="8tf-2g-4VK" secondAttribute="trailing" id="5Gf-Gx-Pq4"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="8tf-2g-4VK" secondAttribute="bottom" id="S64-dL-cc7"/>
+                                                                    <constraint firstItem="8tf-2g-4VK" firstAttribute="leading" secondItem="nqX-tl-zA2" secondAttribute="leading" id="fGk-Tp-pea"/>
+                                                                    <constraint firstItem="8tf-2g-4VK" firstAttribute="top" secondItem="nqX-tl-zA2" secondAttribute="top" id="xaW-7f-rdT"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please connect to WiFi or the network " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1C-Ir-9uq">
+                                                        <rect key="frame" x="15" y="0.0" width="345" height="667"/>
+                                                        <fontDescription key="fontDescription" name="Signika-Regular" family="Signika" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="kzN-pc-4fB" firstAttribute="top" secondItem="XXI-TY-yG0" secondAttribute="top" id="1Ec-0z-AMD"/>
+                                                    <constraint firstItem="kzN-pc-4fB" firstAttribute="centerX" secondItem="XXI-TY-yG0" secondAttribute="centerX" id="B0E-5T-wUy"/>
+                                                    <constraint firstAttribute="trailing" secondItem="S1C-Ir-9uq" secondAttribute="trailing" constant="15" id="Ntl-kR-Nai"/>
+                                                    <constraint firstItem="S1C-Ir-9uq" firstAttribute="leading" secondItem="XXI-TY-yG0" secondAttribute="leading" constant="15" id="RQr-wk-mJJ"/>
+                                                    <constraint firstItem="S1C-Ir-9uq" firstAttribute="top" secondItem="XXI-TY-yG0" secondAttribute="top" id="Z81-rc-0mE"/>
+                                                    <constraint firstAttribute="bottom" secondItem="kzN-pc-4fB" secondAttribute="bottom" id="hUF-Wt-f9N"/>
+                                                    <constraint firstAttribute="bottom" secondItem="S1C-Ir-9uq" secondAttribute="bottom" id="rt5-fN-Kfc"/>
+                                                </constraints>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="dark"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="O7L-PR-pgW" firstAttribute="top" secondItem="WFJ-3H-odi" secondAttribute="top" id="RBI-Ms-z8a"/>
+                                        <constraint firstAttribute="trailing" secondItem="O7L-PR-pgW" secondAttribute="trailing" id="T2t-cf-3IR"/>
+                                        <constraint firstAttribute="bottom" secondItem="O7L-PR-pgW" secondAttribute="bottom" id="c9b-NU-Smu"/>
+                                        <constraint firstItem="O7L-PR-pgW" firstAttribute="leading" secondItem="WFJ-3H-odi" secondAttribute="leading" id="fJk-gE-hoz"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9pJ-Wk-SdX" secondAttribute="trailing" id="FHM-cu-hEr"/>
+                            <constraint firstItem="0AV-JP-4KD" firstAttribute="top" secondItem="xsr-Jw-oMN" secondAttribute="top" id="FIg-hi-xkM"/>
+                            <constraint firstItem="dt6-r7-bpl" firstAttribute="top" secondItem="0AV-JP-4KD" secondAttribute="bottom" id="JxR-H0-Yh4"/>
+                            <constraint firstItem="9pJ-Wk-SdX" firstAttribute="top" secondItem="0AV-JP-4KD" secondAttribute="top" id="Xy3-9d-qSL"/>
+                            <constraint firstAttribute="trailing" secondItem="0AV-JP-4KD" secondAttribute="trailing" id="dat-g0-OPa"/>
+                            <constraint firstItem="9pJ-Wk-SdX" firstAttribute="bottom" secondItem="0AV-JP-4KD" secondAttribute="bottom" id="mrr-SI-2DM"/>
+                            <constraint firstItem="9pJ-Wk-SdX" firstAttribute="leading" secondItem="xsr-Jw-oMN" secondAttribute="leading" id="pKw-Nh-ZhA"/>
+                            <constraint firstItem="0AV-JP-4KD" firstAttribute="leading" secondItem="xsr-Jw-oMN" secondAttribute="leading" id="ssl-OS-UGX"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zSf-74-tAk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1061.5" y="239.5"/>
         </scene>
     </scenes>
     <resources>
