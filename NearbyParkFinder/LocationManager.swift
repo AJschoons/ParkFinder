@@ -26,7 +26,7 @@ class LocationManager: NSObject {
     func getInitialLocation(success success: LocationSuccessBlock, failure: LocationFailureBlock) {
         let locMgr = INTULocationManager.sharedInstance()
         
-        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.Block, timeout: 20.0, delayUntilAuthorized: true, block: {[unowned self] currentLocation, accuracy, status in
+        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.Block, timeout: 10.0, delayUntilAuthorized: true, block: {[unowned self] currentLocation, accuracy, status in
             
             dispatch_async(dispatch_get_main_queue(), {
                 // Got location within City distance of ~5000 meters
@@ -41,18 +41,18 @@ class LocationManager: NSObject {
         })
     }
     
-    /// Gets the location within at least 45-3000ft on success
+    /// Gets the location within at least 45ft-3mi on success
     func getCurrentLocation(success success: LocationSuccessBlock, failure: LocationFailureBlock) {
         let locMgr = INTULocationManager.sharedInstance()
         
         locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.House, timeout: 30.0, delayUntilAuthorized: true, block: {[unowned self] currentLocation, accuracy, status in
             
             dispatch_async(dispatch_get_main_queue(), {
-                // Got location within Neighborhood distance of ~1000 meters
-                if status == .Success || (currentLocation != nil && accuracy == .Block || accuracy == .Neighborhood) {
+                // Got location within Neighborhood distance of ~3000 meters
+                if status == .Success || (currentLocation != nil && accuracy == .Block || accuracy == .Neighborhood || accuracy == .City) {
                     success(location: currentLocation, accuracy: accuracy)
                 } else if status == .TimedOut {
-                    failure(errorDesciption: "Could not determine location within 3000ft. Please try again in better conditions")
+                    failure(errorDesciption: "Could not determine location within 3 miles. Please try again in better conditions")
                 } else {
                     failure(errorDesciption: self.getINTUStatusErrorMessageFromStatus(status))
                 }
