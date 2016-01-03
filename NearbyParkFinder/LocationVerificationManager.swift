@@ -128,7 +128,7 @@ class LocationVerificationManager: NSObject {
     // MARK: Helpers
     
     private func searchForLocation() {
-        LocationManager.sharedManager.getLocation(
+        LocationManager.sharedManager.getInitialLocation(
             success: { [weak self] location, accuracy in
                 guard let strongSelf = self else { return }
                 strongSelf.currentLocation = location

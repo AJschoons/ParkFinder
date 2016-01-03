@@ -12,7 +12,7 @@ import INTULocationManager
 typealias LocationSuccessBlock = (location: CLLocation, accuracy: INTULocationAccuracy) -> Void
 typealias LocationFailureBlock = (errorDesciption: String) -> Void
 
-/// Manages getting location for user
+/// Manages getting location of the device
 class LocationManager: NSObject {
     
     class var sharedManager: LocationManager {
@@ -22,11 +22,30 @@ class LocationManager: NSObject {
         return Static.locationManager
     }
     
-    /// Gets the location within at least 300-3000ft on success
-    func getLocation(success success: LocationSuccessBlock, failure: LocationFailureBlock) {
+    /// Gets the location within at least 300ft-3mi on success
+    func getInitialLocation(success success: LocationSuccessBlock, failure: LocationFailureBlock) {
         let locMgr = INTULocationManager.sharedInstance()
         
-        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.House, timeout: 15.0, delayUntilAuthorized: true, block: {[unowned self] currentLocation, accuracy, status in
+        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.Block, timeout: 20.0, delayUntilAuthorized: true, block: {[unowned self] currentLocation, accuracy, status in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                // Got location within City distance of ~5000 meters
+                if status == .Success || (currentLocation != nil && accuracy == .Neighborhood || accuracy == .City) {
+                    success(location: currentLocation, accuracy: accuracy)
+                } else if status == .TimedOut {
+                    failure(errorDesciption: "Could not determine location within 3 miles. Please try again in better conditions")
+                } else {
+                    failure(errorDesciption: self.getINTUStatusErrorMessageFromStatus(status))
+                }
+            })
+        })
+    }
+    
+    /// Gets the location within at least 45-3000ft on success
+    func getCurrentLocation(success success: LocationSuccessBlock, failure: LocationFailureBlock) {
+        let locMgr = INTULocationManager.sharedInstance()
+        
+        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.House, timeout: 30.0, delayUntilAuthorized: true, block: {[unowned self] currentLocation, accuracy, status in
             
             dispatch_async(dispatch_get_main_queue(), {
                 // Got location within Neighborhood distance of ~1000 meters
@@ -38,7 +57,7 @@ class LocationManager: NSObject {
                     failure(errorDesciption: self.getINTUStatusErrorMessageFromStatus(status))
                 }
             })
-        })
+            })
     }
     
     private func getINTUStatusErrorMessageFromStatus(status: INTULocationStatus) -> String {

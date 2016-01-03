@@ -17,10 +17,7 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapRegionView: UIView!
     
-    private var currentLocation: CLLocation?
-    
     private var parkDetailsForSelectedPark: ParkDetails?
-    
     
     @IBAction func onMyLocationButton(sender: AnyObject) {
         mapManager.onAnimateToCurrentLocation()
@@ -34,21 +31,21 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         mapManager = MapManager(viewToPlaceMapIn: mapRegionView)
-        mapManager.locationSource = self
         mapManager.delegate = self
         
         view.backgroundColor = primaryGreen2
     }
     
     override func viewDidAppear(animated: Bool) {
-        if currentLocation == nil {
+        do {
+            try CurrentLocationManager.sharedManager.getCurrentLocation()
+            
             if simulateLocation {
-                currentLocation = CLLocation(latitude: 42.735841, longitude: -84.491479)
-                onGotLocationSuccess()
-            } else {
-                // Get the location before showing this view controller
-                presentLocationVerificationViewController()
+                onCurrentLocationManagerInitializationSuccess()
             }
+        } catch {
+            // Get the current location before showing this view controller
+            presentLocationVerificationViewController()
         }
     }
     
@@ -66,7 +63,6 @@ class MapViewController: UIViewController {
             guard let parkDetails = parkDetailsForSelectedPark, destination = nav.viewControllers[0] as? ParkDetailsViewController else { return }
             
             destination.parkDetails = parkDetails
-            destination.currentLocation = currentLocation
         }
     }
     
@@ -97,37 +93,9 @@ class MapViewController: UIViewController {
 extension MapViewController {
     // MARK: Location
     
-    private func getLocation() {
-        LocationManager.sharedManager.getLocation(
-            success: { [weak self] location, accuracy in
-                guard let strongSelf = self else { return }
-                strongSelf.currentLocation = location
-                strongSelf.onGotLocationSuccess()
-            },
-            failure: { [weak self] errorDescription in
-                guard let strongSelf = self else { return }
-                strongSelf.onGotLocationFailure()
-            }
-        )
-    }
-    
-    private func onGotLocationSuccess() {
-        // Called when found location or returning from location verification view controller
-        // TODO: handle updating location
-        
+    /// The CurrentLocationManager has been initialized with a location, so update the MapManager
+    private func onCurrentLocationManagerInitializationSuccess() {
         mapManager.onGotLocation()
-    }
-    
-    private func onGotLocationFailure() {
-        presentLocationVerificationViewController()
-    }
-}
-
-extension MapViewController: MapManagerLocationSource {
-    // MARK: MapManagerLocationSource
-    
-    func getCurrentLocation() -> CLLocation? {
-        return currentLocation
     }
 }
 
@@ -166,10 +134,9 @@ extension MapViewController: MapManagerDelegate {
 extension MapViewController: LocationVerificationViewControllerDelegate {
     // MARK: LocationVerificationViewControllerDelegate
     
-    func locationVerificationViewControllerDidGetLocation(location: CLLocation) {
-        // Need to wait until view is visible before animating
-        currentLocation = location
-        onGotLocationSuccess()
+    func locationVerificationViewControllerDidInitializeCurrentLocationManager() {
+        // Note: Need to wait until view is visible before animating
+        onCurrentLocationManagerInitializationSuccess()
     }
 }
 

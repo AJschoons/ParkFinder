@@ -10,12 +10,12 @@ import UIKit
 import CoreLocation
 
 protocol LocationVerificationViewControllerDelegate: class {
-    func locationVerificationViewControllerDidGetLocation(location: CLLocation)
+    func locationVerificationViewControllerDidInitializeCurrentLocationManager()
 }
 
 let LocationVerificationViewControllerIdentifier = "LocationVerificationViewController"
 
-/// Displays when location is unknown and handles resolving the issues and getting the location
+/// Displays when location is unknown and handles resolving the issues and getting the location; initializes the CurrentLocationManager upon success
 class LocationVerificationViewController: UIViewController {
 
     weak var delegate: LocationVerificationViewControllerDelegate?
@@ -82,8 +82,9 @@ class LocationVerificationViewController: UIViewController {
     }
     
     private func onFoundLocation() {
+        CurrentLocationManager.sharedManager.onInitializeWithLocation(locationVerificationManager.currentLocation!)
         dismissViewControllerAnimated(true, completion: nil)
-        delegate?.locationVerificationViewControllerDidGetLocation(locationVerificationManager.currentLocation!)
+        delegate?.locationVerificationViewControllerDidInitializeCurrentLocationManager()
     }
 }
 

@@ -11,7 +11,7 @@ import OpenInGoogleMaps
 import UIKit
 
 private(set) var placesClient: GMSPlacesClient!
-let simulateLocation = true
+let simulateLocation = false
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

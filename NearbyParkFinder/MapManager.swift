@@ -19,10 +19,6 @@ enum MapState {
     case Updated
 }
 
-protocol MapManagerLocationSource: class {
-    func getCurrentLocation() -> CLLocation?
-}
-
 protocol MapManagerDelegate: class {
     func mapManager(mapManager: MapManager, didUpdateWithParks parks: [Park])
     func mapManager(mapManager: MapManager, didTapOnInfoWindowOfPark park: Park)
@@ -38,7 +34,6 @@ class MapManager: NSObject {
         var zoom: Float
     }
     
-    weak var locationSource: MapManagerLocationSource?
     weak var delegate: MapManagerDelegate?
     
     private(set) var googleMapView: GMSMapView!
@@ -163,11 +158,14 @@ class MapManager: NSObject {
     
     /// Animates to current location at current zoom level
     func onAnimateToCurrentLocation() {
-        guard let currentLocation = locationSource?.getCurrentLocation() else { return }
-        
-        let currentPosition = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, zoom: googleMapView.camera.zoom)
-        mapIsAnimatingToCurrentLocation = true
-        googleMapView.animateToCameraPosition(currentPosition)
+        do {
+            let currentLocation = try CurrentLocationManager.sharedManager.getCurrentLocation()
+            let currentPosition = GMSCameraPosition.cameraWithLatitude(currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude, zoom: googleMapView.camera.zoom)
+            mapIsAnimatingToCurrentLocation = true
+            googleMapView.animateToCameraPosition(currentPosition)
+        } catch {
+            return
+        }
     }
     
     private func onParksNeedUpdatingFromMapPositionChange() {
@@ -199,17 +197,22 @@ class MapManager: NSObject {
     }
     
     private func setupMapViewAfterGettingInitialLocation() {
-        guard let location = locationSource?.getCurrentLocation() else { return }
-        
-        googleMapView.myLocationEnabled = true
-        googleMapView.setMinZoom(minMapZoom, maxZoom: maxMapZoom)
-        
-        // Wait until the map has finished animating before changing state to updating parks
-        // so that the search radius can be calculated from the map
-        // This will happen in the idleAtCameraPosition GMSMapViewDelegate function
-        let currentLocationCameraPosition = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: minMapZoom)
-        mapIsAnimatingFromGettingInitialLocation = true
-        googleMapView.animateToCameraPosition(currentLocationCameraPosition)
+        do {
+            let location = try CurrentLocationManager.sharedManager.getCurrentLocation()
+            
+            googleMapView.myLocationEnabled = true
+            googleMapView.setMinZoom(minMapZoom, maxZoom: maxMapZoom)
+            
+            // Wait until the map has finished animating before changing state to updating parks
+            // so that the search radius can be calculated from the map
+            // This will happen in the idleAtCameraPosition GMSMapViewDelegate function
+            let currentLocationCameraPosition = GMSCameraPosition.cameraWithLatitude(location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: minMapZoom)
+            mapIsAnimatingFromGettingInitialLocation = true
+            googleMapView.animateToCameraPosition(currentLocationCameraPosition)
+        } catch {
+            return
+        }
+
     }
     
     private func getMapRadiusInMeters() -> Int {
@@ -253,26 +256,30 @@ class MapManager: NSObject {
     // MARK: Networking
     
     private func searchForNearbyParksFromLocation(location: CLLocation, withRadius radius: Int) {
-        guard let currentLocation = locationSource?.getCurrentLocation() else { return }
-        lastParkSearchInformation = ParkSearchInformation(location: location, radius: radius, zoom: googleMapView.camera.zoom)
-    
-        GooglePlacesClient.sharedClient.getPlacesNearbySearchParks(location, radius: radius,
-            success: { [weak self] task, responseObject in
-                guard let strongSelf = self else { return }
-                guard let responseObject = responseObject else { return }
-                let json = JSON(responseObject)
-                guard let results = json["results"].array else { return }
-                
-                dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        do {
+            let currentLocation = try CurrentLocationManager.sharedManager.getCurrentLocation()
+            lastParkSearchInformation = ParkSearchInformation(location: location, radius: radius, zoom: googleMapView.camera.zoom)
+            
+            GooglePlacesClient.sharedClient.getPlacesNearbySearchParks(location, radius: radius,
+                success: { [weak self] task, responseObject in
                     guard let strongSelf = self else { return }
-                    strongSelf.updateParksAndMarkersFromParkResultsJSON(results, withCurrentLocation: currentLocation)
-                })
-                
-                strongSelf.onUpdatedParks()
-                strongSelf.delegate?.mapManager(strongSelf, didUpdateWithParks: strongSelf.nearbyParks)
-            },
-            failure: defaultAFHTTPFailureBlock
-        )
+                    guard let responseObject = responseObject else { return }
+                    let json = JSON(responseObject)
+                    guard let results = json["results"].array else { return }
+                    
+                    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                        guard let strongSelf = self else { return }
+                        strongSelf.updateParksAndMarkersFromParkResultsJSON(results, withCurrentLocation: currentLocation)
+                    })
+                    
+                    strongSelf.onUpdatedParks()
+                    strongSelf.delegate?.mapManager(strongSelf, didUpdateWithParks: strongSelf.nearbyParks)
+                },
+                failure: defaultAFHTTPFailureBlock
+            )
+        } catch {
+            return
+        }
     }
     
     private func updateParksAndMarkersFromParkResultsJSON(parkResultsJSON: [JSON], withCurrentLocation currentLocation: CLLocation) {
