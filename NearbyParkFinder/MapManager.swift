@@ -62,6 +62,9 @@ class MapManager: NSObject {
     /// The change in zoom where the parks should be loaded again
     private let zoomChangeRequiringParkUpdate: Float = 0.7
     
+    /// The distance in meters a park can be from the center of the map to still be considered at the center
+    private let parkAtCenterOfMapDistanceThreshold = 10.0
+    
     private let markerParkLocationImage = UIImage(named: kParkLocationMarkerImageName)
     private let markerSnippet = "Tap here for more info"
     
@@ -146,14 +149,15 @@ class MapManager: NSObject {
     
     func onParkSelectedWithIndex(index: Int) {
         let park = nearbyParks[index]
-        googleMapView.selectedMarker = nearbyParkMarkers[index]
         
-        // Zoom in to at least the parkSelectionMinZoom, but if already zoomed farther then stay at same zoom
-        let parkSelectionZoom = max(googleMapView.camera.zoom, parkSelectionMinZoom)
-        
-        let selectedParkCameraPosition = GMSCameraPosition.cameraWithLatitude(park.location.latitude, longitude: park.location.longitude, zoom: parkSelectionZoom)
-        mapIsAnimatingFromSelectingLocation = true
-        googleMapView.animateToCameraPosition(selectedParkCameraPosition)
+        if selectionShouldBehaveLikeInfoWindowTapForParkWithIndex(index) {
+            // Show info window of the park
+            delegate?.mapManager(self, didTapOnInfoWindowOfPark: park)
+            
+        } else {
+            // Animate to the park and set its marker as selected
+            setMarkerSelectedAndAnimateToPark(park, withMarker: nearbyParkMarkers[index])
+        }
     }
     
     /// Animates to current location at current zoom level
@@ -251,6 +255,31 @@ class MapManager: NSObject {
     
     private func shouldNotUpdateParksDuringMapPositionChange() -> Bool {
         return mapIsAnimatingFromGettingInitialLocation || mapIsAnimatingFromSelectingLocation || mapIsAnimatingFromTappingOnMarker || mapIsAnimatingToCurrentLocation
+    }
+    
+    /// Returns true if the park is already selected and at the center of the map
+    private func selectionShouldBehaveLikeInfoWindowTapForParkWithIndex(parkIndex: Int) -> Bool {
+        guard let selectedMarker = googleMapView.selectedMarker else { return false }
+        guard nearbyParkMarkers[parkIndex] == selectedMarker else { return false }
+        
+        let park = nearbyParks[parkIndex]
+        let parkLocation = CLLocation(latitude: park.location.latitude, longitude: park.location.longitude)
+        
+        let centerMapCoordinate = getMapCenterCoordinate()
+        let centerMapLocation = CLLocation(latitude: centerMapCoordinate.latitude, longitude: centerMapCoordinate.longitude)
+        
+        return parkLocation.distanceFromLocation(centerMapLocation) < parkAtCenterOfMapDistanceThreshold
+    }
+    
+    private func setMarkerSelectedAndAnimateToPark(park: Park, withMarker marker: GMSMarker) {
+        googleMapView.selectedMarker = marker
+        
+        // Zoom in to at least the parkSelectionMinZoom, but if already zoomed farther then stay at same zoom
+        let parkSelectionZoom = max(googleMapView.camera.zoom, parkSelectionMinZoom)
+        
+        let selectedParkCameraPosition = GMSCameraPosition.cameraWithLatitude(park.location.latitude, longitude: park.location.longitude, zoom: parkSelectionZoom)
+        mapIsAnimatingFromSelectingLocation = true
+        googleMapView.animateToCameraPosition(selectedParkCameraPosition)
     }
     
     // MARK: Networking
