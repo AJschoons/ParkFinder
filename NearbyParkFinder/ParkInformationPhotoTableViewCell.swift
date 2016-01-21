@@ -13,6 +13,8 @@ class ParkInformationPhotoTableViewCell: ParkInformationTableViewCell {
     @IBOutlet weak var parkImageView: UIImageView!
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+        
         parkImageView.layer.masksToBounds = true
         parkImageView.layer.cornerRadius = 5
     }

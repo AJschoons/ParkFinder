@@ -27,6 +27,7 @@ class NetworkReachabilityVerificationViewController: UIViewController {
     }
     
     override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
         guard networkReachabilityChangedToReachable else { return }
         
         delegate?.networkReachabilityVerificationViewControllerDidVerifyReachability()

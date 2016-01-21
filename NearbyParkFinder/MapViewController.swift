@@ -53,6 +53,7 @@ class MapViewController: PFViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
         guard let identifier = segue.identifier else { return }
         
         if identifier == kParkTableViewControllerEmbedSegueIdentifier {
