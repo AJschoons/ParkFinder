@@ -26,6 +26,8 @@ class LocationVerificationViewController: UIViewController {
     
     private var locationVerificationManager: LocationVerificationManager!
     
+    private var currentLocationManagerInitialized = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,7 +37,16 @@ class LocationVerificationViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
         locationVerificationManager.onViewDidAppear()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        guard currentLocationManagerInitialized else { return }
+        
+        delegate?.locationVerificationViewControllerDidInitializeCurrentLocationManager()
     }
     
     private func updateUIForState(state: LocationVerificationManagerState) {
@@ -81,10 +92,11 @@ class LocationVerificationViewController: UIViewController {
         checkingLocationView.hidden = hidden
     }
     
+    /// Dismiss the view controller and notify the delegate once the view disappears
     private func onFoundLocation() {
         CurrentLocationManager.sharedManager.onInitializeWithLocation(locationVerificationManager.currentLocation!)
+        currentLocationManagerInitialized = true
         dismissViewControllerAnimated(true, completion: nil)
-        delegate?.locationVerificationViewControllerDidInitializeCurrentLocationManager()
     }
 }
 

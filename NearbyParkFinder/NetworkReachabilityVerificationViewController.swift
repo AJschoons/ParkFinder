@@ -18,14 +18,23 @@ class NetworkReachabilityVerificationViewController: UIViewController {
     
     weak var delegate: NetworkReachabilityVerificationViewControllerDelegate?
     
+    private var networkReachabilityChangedToReachable = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onNetworkReachabilityChangedToReachable", name: kNetworkReachabilityChangedToReachableNotification, object: nil)
     }
     
-    func onNetworkReachabilityChangedToReachable() {
-        dismissViewControllerAnimated(true, completion: nil)
+    override func viewDidDisappear(animated: Bool) {
+        guard networkReachabilityChangedToReachable else { return }
+        
         delegate?.networkReachabilityVerificationViewControllerDidVerifyReachability()
+    }
+    
+    /// Dismiss the view controller and notify the delegate once the view disappears
+    func onNetworkReachabilityChangedToReachable() {
+        networkReachabilityChangedToReachable = true
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
