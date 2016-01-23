@@ -22,18 +22,23 @@ class LocationManager: NSObject {
         return Static.locationManager
     }
     
-    /// Gets the location within at least 300ft-3mi on success
+    private var numberOfInitialLocationSearchRequests = 0
+    
+    /// Gets the location within at least 300ft-3mi on success. On each failure adds 5 seconds to location request timeout
     func getInitialLocation(success success: LocationSuccessBlock, failure: LocationFailureBlock) {
         let locMgr = INTULocationManager.sharedInstance()
         
-        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.Block, timeout: 10.0, delayUntilAuthorized: true, block: {[unowned self] currentLocation, accuracy, status in
+        let timeout = 10.0 + 5.0 * Double(numberOfInitialLocationSearchRequests)
+        ++numberOfInitialLocationSearchRequests
+        
+        locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.Block, timeout: timeout, delayUntilAuthorized: true, block: {[unowned self] currentLocation, accuracy, status in
             
             dispatch_async(dispatch_get_main_queue(), {
                 // Got location within City distance of ~5000 meters
                 if status == .Success || (currentLocation != nil && accuracy == .Neighborhood || accuracy == .City) {
                     success(location: currentLocation, accuracy: accuracy)
                 } else if status == .TimedOut {
-                    failure(errorDesciption: "Could not determine location within 3 miles. Please try again in better conditions")
+                    failure(errorDesciption: "Could not determine location within 3 miles. Please try again in better conditions, the app will continue attempting to get the location with longer periods of time before failure")
                 } else {
                     failure(errorDesciption: self.getINTUStatusErrorMessageFromStatus(status))
                 }
