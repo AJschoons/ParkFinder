@@ -80,7 +80,7 @@
 		818426851C385F93007860CA /* ParkInformationPhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkInformationPhotoTableViewCell.swift; sourceTree = "<group>"; };
 		818426871C386AA8007860CA /* GooglePlacesPhotoClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesPhotoClient.swift; sourceTree = "<group>"; };
 		818426891C388C62007860CA /* CurrentLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentLocationManager.swift; sourceTree = "<group>"; };
-		819341F41C28909D003CA883 /* NearbyParkFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NearbyParkFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		819341F41C28909D003CA883 /* parkfinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = parkfinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819341F71C28909D003CA883 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		819341FC1C28909D003CA883 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		819341FE1C28909D003CA883 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 		819341F51C28909D003CA883 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				819341F41C28909D003CA883 /* NearbyParkFinder.app */,
+				819341F41C28909D003CA883 /* parkfinder.app */,
 				819342081C28909D003CA883 /* NearbyParkFinderTests.xctest */,
 				819342131C28909D003CA883 /* NearbyParkFinderUITests.xctest */,
 			);
@@ -310,7 +310,7 @@
 			);
 			name = NearbyParkFinder;
 			productName = NearbyParkFinder;
-			productReference = 819341F41C28909D003CA883 /* NearbyParkFinder.app */;
+			productReference = 819341F41C28909D003CA883 /* parkfinder.app */;
 			productType = "com.apple.product-type.application";
 		};
 		819342071C28909D003CA883 /* NearbyParkFinderTests */ = {
@@ -361,6 +361,7 @@
 				TargetAttributes = {
 					819341F31C28909D003CA883 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 2ZW34Q8J6R;
 					};
 					819342071C28909D003CA883 = {
 						CreatedOnToolsVersion = 7.2;
@@ -642,11 +643,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = NearbyParkFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adamschoonmaker.NearbyParkFinder;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spartansoftware.parkfinder;
+				PRODUCT_NAME = parkfinder;
 				SWIFT_OBJC_BRIDGING_HEADER = "NearbyParkFinder/NearbyParkFinder-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -658,11 +660,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = NearbyParkFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adamschoonmaker.NearbyParkFinder;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.spartansoftware.parkfinder;
+				PRODUCT_NAME = parkfinder;
 				SWIFT_OBJC_BRIDGING_HEADER = "NearbyParkFinder/NearbyParkFinder-Bridging-Header.h";
 			};
 			name = Release;
