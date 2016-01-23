@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SJJ-nJ-zcd">
-                                <rect key="frame" x="120" y="233" width="135" height="200"/>
+                                <rect key="frame" x="83" y="208.5" width="209" height="249"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenLogo" translatesAutoresizingMaskIntoConstraints="NO" id="jF4-wT-DR9">
-                                        <rect key="frame" x="0.0" y="0.0" width="135" height="200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="209" height="249"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="THX-ea-AtD"/>
-                                            <constraint firstAttribute="width" constant="135" id="fLN-Fi-tAf"/>
+                                            <constraint firstAttribute="height" constant="249" id="THX-ea-AtD"/>
+                                            <constraint firstAttribute="width" constant="209" id="fLN-Fi-tAf"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -50,6 +50,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launchScreenLogo" width="135" height="200"/>
+        <image name="launchScreenLogo" width="209" height="249"/>
     </resources>
 </document>
