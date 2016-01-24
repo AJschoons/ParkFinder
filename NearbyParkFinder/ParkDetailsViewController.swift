@@ -28,8 +28,6 @@ class ParkDetailsViewController: PFViewController {
         }
     }
     
-    var currentLocation: CLLocation!
-    
     private var parkImage: UIImage?
     
     /// The types of information to be shown for the place
@@ -140,12 +138,18 @@ class ParkDetailsViewController: PFViewController {
     }
     
     private func onAddressSelected() {
-        guard let address = parkDetails?.place.formattedAddress, location = currentLocation else { return }
+        guard let address = parkDetails?.place.formattedAddress else { return }
         
-        let directions = GoogleDirectionsDefinition()
-        directions.startingPoint = GoogleDirectionsWaypoint(location: location.coordinate)
-        directions.destinationPoint = GoogleDirectionsWaypoint(query: address)
-        OpenInGoogleMapsController.sharedInstance().openDirections(directions)
+        do {
+            let location = try CurrentLocationManager.sharedManager.getCurrentLocation()
+            
+            let directions = GoogleDirectionsDefinition()
+            directions.startingPoint = GoogleDirectionsWaypoint(location: location.coordinate)
+            directions.destinationPoint = GoogleDirectionsWaypoint(query: address)
+            OpenInGoogleMapsController.sharedInstance().openDirections(directions)
+        } catch {
+            return
+        }
     }
     
     private func onPhoneSelected() {
