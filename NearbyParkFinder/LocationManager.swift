@@ -24,11 +24,11 @@ class LocationManager: NSObject {
     
     private var numberOfInitialLocationSearchRequests = 0
     
-    /// Gets the location within at least 300ft-3mi on success. On each failure adds 5 seconds to location request timeout
+    /// Gets the location within at least 300ft-3mi on success. Each failure adds 5 seconds to location request timeout, up to 30
     func getInitialLocation(success success: LocationSuccessBlock, failure: LocationFailureBlock) {
         let locMgr = INTULocationManager.sharedInstance()
         
-        let timeout = 10.0 + 5.0 * Double(numberOfInitialLocationSearchRequests)
+        let timeout = min(10.0 + 5.0 * Double(numberOfInitialLocationSearchRequests), 30)
         ++numberOfInitialLocationSearchRequests
         
         locMgr.requestLocationWithDesiredAccuracy(INTULocationAccuracy.Block, timeout: timeout, delayUntilAuthorized: true, block: {[unowned self] currentLocation, accuracy, status in
