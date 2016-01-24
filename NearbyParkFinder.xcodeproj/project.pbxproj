@@ -41,6 +41,8 @@
 		8193423A1C28D8DE003CA883 /* LocationVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819342391C28D8DE003CA883 /* LocationVerificationViewController.swift */; };
 		8193423C1C28F058003CA883 /* LocationVerificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8193423B1C28F058003CA883 /* LocationVerificationManager.swift */; };
 		8199A5631C55359000E157B6 /* PFSafariViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8199A5621C55359000E157B6 /* PFSafariViewController.swift */; };
+		8199A5651C553E7800E157B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8199A5641C553E7800E157B6 /* GoogleService-Info.plist */; };
+		8199A5671C5552BC00E157B6 /* GoogleAnalyticsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8199A5661C5552BC00E157B6 /* GoogleAnalyticsHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		819342391C28D8DE003CA883 /* LocationVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVerificationViewController.swift; sourceTree = "<group>"; };
 		8193423B1C28F058003CA883 /* LocationVerificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationVerificationManager.swift; sourceTree = "<group>"; };
 		8199A5621C55359000E157B6 /* PFSafariViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFSafariViewController.swift; sourceTree = "<group>"; };
+		8199A5641C553E7800E157B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8199A5661C5552BC00E157B6 /* GoogleAnalyticsHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAnalyticsHelpers.swift; sourceTree = "<group>"; };
 		D8A5938812105C92651A63DC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				81092D231C39C82E00349584 /* PFViewController.swift */,
-				8199A5621C55359000E157B6 /* PFSafariViewController.swift */,
 			);
 			name = "Base Classes";
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				816560E01C2C611F0049A4CF /* Main Map */,
 				81092D211C39A07F00349584 /* NetworkReachabilityVerificationViewController.swift */,
 				811DF3091C34877600A3EC55 /* Park Details */,
+				8199A5621C55359000E157B6 /* PFSafariViewController.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -204,6 +208,7 @@
 		816560E31C2C6DDD0049A4CF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8199A5641C553E7800E157B6 /* GoogleService-Info.plist */,
 				819342031C28909D003CA883 /* Info.plist */,
 				819342281C28AC94003CA883 /* NearbyParkFinder-Bridging-Header.h */,
 				816560D61C2B8EA10049A4CF /* Podfile */,
@@ -283,6 +288,7 @@
 			children = (
 				819341FE1C28909D003CA883 /* Assets.xcassets */,
 				816560E61C2CF04E0049A4CF /* Colors.swift */,
+				8199A5661C5552BC00E157B6 /* GoogleAnalyticsHelpers.swift */,
 				8193422F1C28BBC4003CA883 /* Signika-Bold.otf */,
 				819342301C28BBC4003CA883 /* Signika-Light.otf */,
 				819342311C28BBC4003CA883 /* Signika-Regular.otf */,
@@ -403,6 +409,7 @@
 			files = (
 				819342021C28909D003CA883 /* LaunchScreen.storyboard in Resources */,
 				819342351C28BBC4003CA883 /* Signika-Regular.otf in Resources */,
+				8199A5651C553E7800E157B6 /* GoogleService-Info.plist in Resources */,
 				816560D71C2B8EA10049A4CF /* Podfile in Resources */,
 				819342361C28BBC4003CA883 /* Signika-Semibold.otf in Resources */,
 				819342341C28BBC4003CA883 /* Signika-Light.otf in Resources */,
@@ -504,6 +511,7 @@
 				8193422D1C28B039003CA883 /* Strings.swift in Sources */,
 				8184268A1C388C62007860CA /* CurrentLocationManager.swift in Sources */,
 				819342271C28AC20003CA883 /* LocationManager.swift in Sources */,
+				8199A5671C5552BC00E157B6 /* GoogleAnalyticsHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +656,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Schoonmaker (3922BQNXA6)";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NearbyParkFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -665,6 +674,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Spartan Software, LLC (2ZW34Q8J6R)";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NearbyParkFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

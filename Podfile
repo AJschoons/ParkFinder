@@ -4,6 +4,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 pod 'AFNetworking'
+pod 'Google/Analytics'
 pod 'GoogleMaps'
 pod 'INTULocationManager'
 pod 'OpenInGoogleMaps'

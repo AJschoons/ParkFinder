@@ -7,6 +7,7 @@
 //
 
 import AFNetworking
+import Google
 import GoogleMaps
 import OpenInGoogleMaps
 import UIKit
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Prepares the app before launching
     func initialize() {
         setupAFNetworkMonitoring()
+        setupGoogleAnalytics()
         initializeGoogleMaps()
         initializeOpenInGoogleMapsController()
         customizeAppearance()
@@ -51,6 +53,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func initializeOpenInGoogleMapsController() {
         OpenInGoogleMapsController.sharedInstance().fallbackStrategy = GoogleMapsFallback.AppleMaps
+    }
+    
+    func setupGoogleAnalytics() {
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Configure GAI options.
+        let gai = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        //gai.logger.logLevel = GAILogLevel.Verbose  // remove before app release
+        gai.dispatchInterval = 20
     }
     
     func setupAFNetworkMonitoring() {

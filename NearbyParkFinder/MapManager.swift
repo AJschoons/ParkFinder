@@ -151,10 +151,14 @@ class MapManager: NSObject {
         let park = nearbyParks[index]
         
         if selectionShouldBehaveLikeInfoWindowTapForParkWithIndex(index) {
+            trackUXTouchEventWithLabel(kParkTableDoubleParkCellTouchEventLabel, andScreenName: kParksMapScreenName)
+            
             // Show info window of the park
             delegate?.mapManager(self, didTapOnInfoWindowOfPark: park)
             
         } else {
+            trackUXTouchEventWithLabel(kParkTableParkCellTouchEventLabel, andScreenName: kParksMapScreenName)
+            
             // Animate to the park and set its marker as selected
             setMarkerSelectedAndAnimateToPark(park, withMarker: nearbyParkMarkers[index])
         }
@@ -401,6 +405,7 @@ extension MapManager: GMSMapViewDelegate {
     
     /// Called after a marker has been tapped.
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
+        trackUXTouchEventWithLabel(kParkMarkerTouchEventLabel, andScreenName: kParksMapScreenName)
         mapIsAnimatingFromTappingOnMarker = true
         return false
     }
@@ -417,6 +422,7 @@ extension MapManager: GMSMapViewDelegate {
     /// Called after a marker's info window has been tapped
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
         if let index = nearbyParkMarkers.indexOf(marker) {
+            trackUXTouchEventWithLabel(kParkInfoWindowTouchEventLabel, andScreenName: kParksMapScreenName)
             delegate?.mapManager(self, didTapOnInfoWindowOfPark: nearbyParks[index])
         }
     }

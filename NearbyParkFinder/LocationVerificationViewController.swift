@@ -5,9 +5,9 @@
 //  Created by adam on 12/21/15.
 //  Copyright © 2015 Adam Schoonmaker. All rights reserved.
 //
-
-import UIKit
 import CoreLocation
+import Google
+import UIKit
 
 protocol LocationVerificationViewControllerDelegate: class {
     func locationVerificationViewControllerDidInitializeCurrentLocationManager()
@@ -34,6 +34,11 @@ class LocationVerificationViewController: UIViewController {
         locationVerificationManager = LocationVerificationManager()
         locationVerificationManager.delegate = self
         initializeUI()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackViewWillAppearForScreenName(kLocationVerificationScreenName)
     }
     
     override func viewDidAppear(animated: Bool) {

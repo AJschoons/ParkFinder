@@ -6,6 +6,7 @@
 //  Copyright © 2016 Adam Schoonmaker. All rights reserved.
 //
 
+import Google
 import UIKit
 
 protocol NetworkReachabilityVerificationViewControllerDelegate: class {
@@ -24,6 +25,11 @@ class NetworkReachabilityVerificationViewController: UIViewController {
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onNetworkReachabilityChangedToReachable", name: kNetworkReachabilityChangedToReachableNotification, object: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackViewWillAppearForScreenName(kNetworkVerificationScreenName)
     }
     
     override func viewDidDisappear(animated: Bool) {

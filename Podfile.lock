@@ -14,13 +14,30 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
+  - Google/Analytics (1.3.2):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (1.3.2):
+    - GoogleInterchangeUtilities (~> 1.0)
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.1)
+  - GoogleAnalytics (3.14.0)
+  - GoogleInterchangeUtilities (1.1.0):
+    - GoogleSymbolUtilities (~> 1.0)
   - GoogleMaps (1.11.1)
+  - GoogleNetworkingUtilities (1.0.0):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleSymbolUtilities (1.0.3)
+  - GoogleUtilities (1.1.0):
+    - GoogleSymbolUtilities (~> 1.0.0)
   - INTULocationManager (4.1.1)
   - OpenInGoogleMaps (0.1.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - AFNetworking
+  - Google/Analytics
   - GoogleMaps
   - INTULocationManager
   - OpenInGoogleMaps
@@ -37,7 +54,13 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  Google: 97618e118111b998cce1d8dd1bd98b82301d72db
+  GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
+  GoogleInterchangeUtilities: d7f7174176fbcf9710f696f1acebad4dbd98ac03
   GoogleMaps: c947160008f414c66707a5ea60f35e92055c7670
+  GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
+  GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
+  GoogleUtilities: 8ed9134debe11719097881711464752900668f10
   INTULocationManager: 83c7373048d583cda57e25eefb9bb8a3675acf16
   OpenInGoogleMaps: 60dd887d2e2b2149166a03bd6dab1d4478a7d3e8
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a

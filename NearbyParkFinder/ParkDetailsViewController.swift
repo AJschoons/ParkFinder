@@ -6,6 +6,7 @@
 //  Copyright © 2015 Adam Schoonmaker. All rights reserved.
 //
 
+import Google
 import GoogleMaps
 import OpenInGoogleMaps
 import UIKit
@@ -51,6 +52,11 @@ class ParkDetailsViewController: PFViewController {
         parkDetailsTable.estimatedRowHeight = estimatedRowHeight
         
         getParkPhoto()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackViewWillAppearForScreenName(kParkDetailsScreenName)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -144,6 +150,8 @@ class ParkDetailsViewController: PFViewController {
         do {
             let location = try CurrentLocationManager.sharedManager.getCurrentLocation()
             
+            trackUXTouchEventWithLabel(kParkDetailsAddressTouchEventLabel, andScreenName: kParkDetailsScreenName)
+            
             let directions = GoogleDirectionsDefinition()
             directions.startingPoint = GoogleDirectionsWaypoint(location: location.coordinate)
             directions.destinationPoint = GoogleDirectionsWaypoint(query: address)
@@ -157,6 +165,8 @@ class ParkDetailsViewController: PFViewController {
     private func onPhoneSelected() {
         guard let phoneNumber = parkDetails?.place.phoneNumber else { return }
         
+        trackUXTouchEventWithLabel(kParkDetailsPhoneTouchEventLabel, andScreenName: kParkDetailsScreenName)
+        
         let phoneNumberReducedToOnlyNumbers = phoneNumber.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet).joinWithSeparator("")
         
         if let phoneURL = NSURL(string: "telprompt://\(phoneNumberReducedToOnlyNumbers)") {
@@ -167,6 +177,8 @@ class ParkDetailsViewController: PFViewController {
     /// Opens up website in Safari view controller
     private func onWebsiteSelected() {
         guard let website = parkDetails?.place.website else { return }
+        
+        trackUXTouchEventWithLabel(kParkDetailsWebsiteTouchEventLabel, andScreenName: kParkDetailsScreenName)
         
         let svc = PFSafariViewController(URL: website)
         presentViewController(svc, animated: true, completion: nil)

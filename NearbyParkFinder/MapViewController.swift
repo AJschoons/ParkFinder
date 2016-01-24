@@ -7,6 +7,7 @@
 //
 
 import AFNetworking
+import Google
 import GoogleMaps
 import SwiftyJSON
 import UIKit
@@ -22,6 +23,7 @@ class MapViewController: PFViewController {
     private var parkDetailsForSelectedPark: ParkDetails?
     
     @IBAction func onMyLocationButton(sender: AnyObject) {
+        trackUXTouchEventWithLabel(kParkMapMyLocationTouchEventLabel, andScreenName: kParksMapScreenName)
         mapManager.onAnimateToCurrentLocation()
     }
     
@@ -40,6 +42,11 @@ class MapViewController: PFViewController {
         mapManager.delegate = self
         
         view.backgroundColor = primaryGreen2
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackViewWillAppearForScreenName(kParksMapScreenName)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -137,11 +144,6 @@ extension MapViewController: MapManagerDelegate {
                 }
                 
                 if let place = place {
-                    print("Place name \(place.name)")
-                    print("Place address \(place.formattedAddress)")
-                    print("Place placeID \(place.placeID)")
-                    print("Place attributions \(place.attributions)")
-                    
                     strongSelf.presentParkDetailsViewControllerWithParkDetails(ParkDetails(place: place, photoReference: park.photoReference))
                 } else {
                     print("No place details for \(park.name)")
