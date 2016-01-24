@@ -137,6 +137,7 @@ class ParkDetailsViewController: PFViewController {
         if place.attributions?.length > 0 { informationTypesToShow.append(.Attributions) }
     }
     
+    /// Opens up directions to park in whatever map app is available
     private func onAddressSelected() {
         guard let address = parkDetails?.place.formattedAddress else { return }
         
@@ -152,6 +153,7 @@ class ParkDetailsViewController: PFViewController {
         }
     }
     
+    /// Prompts user to call the number
     private func onPhoneSelected() {
         guard let phoneNumber = parkDetails?.place.phoneNumber else { return }
         
@@ -162,9 +164,12 @@ class ParkDetailsViewController: PFViewController {
         }
     }
     
+    /// Opens up website in Safari view controller
     private func onWebsiteSelected() {
         guard let website = parkDetails?.place.website else { return }
-        UIApplication.sharedApplication().openURL(website)
+        
+        let svc = PFSafariViewController(URL: website)
+        presentViewController(svc, animated: true, completion: nil)
     }
     
     private func frameForImage(image: UIImage, inAspectFitImageViewWithSize imageViewSize: CGSize) -> CGRect {

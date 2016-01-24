@@ -55,7 +55,7 @@ class CurrentLocationManager: NSObject {
     
     func getCurrentLocation() throws -> CLLocation {
         if simulateLocation {
-            currentLocation = CLLocation(latitude: 42.735841, longitude: -84.491479)
+            currentLocation = CLLocation(latitude: 40.75921100, longitude: -73.98463800)
             return currentLocation
         }
         
