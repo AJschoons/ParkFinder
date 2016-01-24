@@ -133,21 +133,30 @@ extension MapViewController: MapManagerDelegate {
     
     func mapManager(mapManager: MapManager, didTapOnInfoWindowOfPark park: Park) {
         
-        // TODO: handle these errors with an alert
         placesClient.lookUpPlaceID(park.id,
             callback: { [weak self] (place: GMSPlace?, error: NSError?) in
                 guard let strongSelf = self else { return }
                 
-                if let error = error {
-                    print("lookup place id query error: \(error.localizedDescription)")
+                guard let place = place where error == nil else {
+                    var errorMessage: String!
+                    
+                    if let error = error {
+                        errorMessage = "Lookup place id query error: \(error.localizedDescription)"
+                    } else {
+                        errorMessage = "No park details for \(park.name)"
+                    }
+                    
+                    let alertController = UIAlertController(title: "Park Details Error", message: errorMessage, preferredStyle: .Alert)
+                    let OkAction = UIAlertAction(title: "Okay", style: .Default) { action in
+                        trackUXTouchEventWithLabel(kParkDetailsErrorAlertOkayTouchEventLabel, andScreenName: kParksMapScreenName)
+                    }
+                    alertController.addAction(OkAction)
+                    strongSelf.presentViewController(alertController, animated: true, completion: nil)
+                    
                     return
                 }
                 
-                if let place = place {
-                    strongSelf.presentParkDetailsViewControllerWithParkDetails(ParkDetails(place: place, photoReference: park.photoReference))
-                } else {
-                    print("No place details for \(park.name)")
-                }
+                strongSelf.presentParkDetailsViewControllerWithParkDetails(ParkDetails(place: place, photoReference: park.photoReference))
         })
     }
 }

@@ -16,6 +16,7 @@ let kParkInformationPhotoCellIdentifier = "parkInformationPhotoCell"
 
 // Events
 let kParkDetailsAddressTouchEventLabel = "Park Details Address Tap"
+let kParkDetailsErrorAlertOkayTouchEventLabel = "Park Details Error Alert Dismiss"
 let kParkDetailsPhoneTouchEventLabel = "Park Details Phone Tap"
 let kParkDetailsWebsiteTouchEventLabel = "Park Details Website Tap"
 let kParkInfoWindowTouchEventLabel = "Park Info Window Tap"
