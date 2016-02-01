@@ -1,5 +1,7 @@
 ![park_finder_logotype](https://cloud.githubusercontent.com/assets/7013639/12733155/430b21d8-c907-11e5-8ce7-406f319f2a0c.png)
 
+<img src="https://cloud.githubusercontent.com/assets/7013639/12730935/39e1fff6-c8fc-11e5-8e9b-37aac951b717.png" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/7013639/12730941/3f8eb084-c8fc-11e5-9707-1833b4acec19.png" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/7013639/12730942/41f44c30-c8fc-11e5-8cda-e968c24413d6.png" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/7013639/12730947/46586aae-c8fc-11e5-8da2-cbb8f1b85b55.png" width="23%"></img>
+
 Repository for the Park Finder iOS app, available at: https://itunes.apple.com/us/app/park-finder-maps-nearby-park/id1078040422
 
 Park Finder is an app that allows users to search for nearby parks to visit and provides basic park details for further park research. Users can scroll or zoom the map from their current location and it will update with the 20 most popular parks around them. It is powered by Google Maps and Google Places, ensuring it has the most up-to-date information of local parks regardless of location. 
@@ -7,8 +9,6 @@ Park Finder is an app that allows users to search for nearby parks to visit and 
 When a park is selected, the app will present name, address, phone, and website. Selecting the address will open navigation through Google Maps, with Apples Maps as a fall back. Touching the phone number allows the user to call the park, and touching the website link will open the park's website in-app with Safari.
 
 The app and it's design, color scheme, abd logo, were all done by Adam Schoonmaker.
-
-<img src="https://cloud.githubusercontent.com/assets/7013639/12730935/39e1fff6-c8fc-11e5-8e9b-37aac951b717.png" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/7013639/12730941/3f8eb084-c8fc-11e5-9707-1833b4acec19.png" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/7013639/12730942/41f44c30-c8fc-11e5-8cda-e968c24413d6.png" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/7013639/12730947/46586aae-c8fc-11e5-8da2-cbb8f1b85b55.png" width="23%"></img> 
 
 # Design Decisions
 
