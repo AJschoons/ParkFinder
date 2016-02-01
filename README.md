@@ -51,3 +51,7 @@ GooglePlacesClient.sharedClient.getPlacesNearbySearchParks(location, radius: rad
   failure: defaultAFHTTPFailureBlock
 )
 ```
+
+### Google Analytics
+
+The app is setup to track how long a user spends on each screen, and also most any significant UI event. This includes touching map markers, making a call, navigating to a park, animating to current location, and so on. Being able to do this was a nice perk of keeping the app simple. It will be interesting to see which parts of the apps people use the most.
