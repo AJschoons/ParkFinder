@@ -9,19 +9,23 @@ When a park is selected, the app will present name, address, phone, and website.
 
 # Design Decisions
 
-### Location and Nework Connectivity
+Much of the code for the Park Finder app is designed around Delegation and State Machines. Probably the best example of this can be seen in MapViewController. It is the main view controller the user interacts with, however is only ~200 lines despite being responsible for a Google Map and table of parks.
 
-Much of the Park Finder app is designed around Delegation and State Machines. 
+I  generally favored Storyboards because I like how they make the UI flow visibly clear, and lower the amount of boilerplate code needed. 
 
-An example of this is with location verification. The app requires the user be able to get their location, or else the app is useless. Whenever the user's location isn't available, it handles that by presenting a LocationVerificationViewController modally. This happens when the app first opens up to verify an initial location. This LocationVerificationViewController handles verifying a location by being a delegate of a LocationVerificationManager. The LocationVerificationManager uses a state machine (pictured below) to automatically handle the different states of verifying a location over time: SearchingForLocation, SearchingForLocationExtended, LocationErrorIdle, and FoundLocation. As a delegate of the LocationVerificationManager, the LocationVerificationViewController then responds and updates its UI accordingly to the changes in state. When the state finally changes to FoundLocation, the LocationVerificationViewController notifies its own delegate, which should be the view controller that presented it, that the location has been verified. This presenting view controller can then respond accordingly. 
+### Google Map + Interaction Management
+
+The meat of this app is the MapViewController. This is where the user spends most of their time searching for nearby parks. As the app developed this became increasingly complex, so I abstracted the logic out of the MapViewController into a MapManager object that has the MapViewController as its delegate. The MapManager is both a state machine (simplified picture below), and just generally a manager for events related to the Google Map. Later I would like to further abstract that state machine into its own class that the MapManager uses. Using this state machine made it much easier to handle all the events that would cause the map to have to reload the parks for the current visible portion of the map. Examples are scrolling, zooming, selecting another park, and animating to current location. More details can be seen in MapManager.swift and MapViewController.swift, but it made the MapViewController a very clean class that's <200 lines despite its complexity.
+
+<img width="480" alt="mapmanagerstatemachine" src="https://cloud.githubusercontent.com/assets/7013639/12732409/6bfafb80-c903-11e5-8a52-b0b2db858d19.png">
+
+### Ensuring Location and Nework Connectivity
+
+A more specific example of the delegation and state machines is with location verification. The app requires the user be able to get their location, or else the app is useless. Whenever the user's location isn't available, it handles that by presenting a LocationVerificationViewController modally. This happens when the app first opens up to verify an initial location. This LocationVerificationViewController handles verifying a location by being a delegate of a LocationVerificationManager. The LocationVerificationManager uses a state machine (pictured below) to automatically handle the different states of verifying a location over time: SearchingForLocation, SearchingForLocationExtended, LocationErrorIdle, and FoundLocation. As a delegate of the LocationVerificationManager, the LocationVerificationViewController then responds and updates its UI accordingly to the changes in state. When the state finally changes to FoundLocation, the LocationVerificationViewController notifies its own delegate, which should be the view controller that presented it, that the location has been verified. This presenting view controller can then respond accordingly. 
 
 I chose to design it this way because it simplifies managing the app's state. Network connectivity is also managed this way. This ensures that whenever the user is on a main functional view controller, location services and network connectivity are available. Spotify handles network connectivity in a similar fashion in its current early 2016 version.
 
 <img width="677" alt="locationverificationstatemachine" src="https://cloud.githubusercontent.com/assets/7013639/12732192/6f709212-c902-11e5-83af-95800f688aa2.png">
 
-### Google Maps + Interaction Management
 
-The meat of this app is the MapViewController. This is where the user spends most of their time searching for nearby parks. As the app developed this became increasingly complex, so I abstracted the logic out of the MapViewController into a MapManager object. The MapManager is both a state machine (pictured below), and just generally a manager for events related to the Google Map. Later I would like to further abstract that state machine into its own class. 
-
-<img width="480" alt="mapmanagerstatemachine" src="https://cloud.githubusercontent.com/assets/7013639/12732409/6bfafb80-c903-11e5-8a52-b0b2db858d19.png">
 
