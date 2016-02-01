@@ -19,3 +19,9 @@ I chose to design it this way because it simplifies managing the app's state. Ne
 
 <img width="677" alt="locationverificationstatemachine" src="https://cloud.githubusercontent.com/assets/7013639/12732192/6f709212-c902-11e5-83af-95800f688aa2.png">
 
+### Google Maps + Interaction Management
+
+The meat of this app is the MapViewController. This is where the user spends most of their time searching for nearby parks. As the app developed this became increasingly complex, so I abstracted the logic out of the MapViewController into a MapManager object. The MapManager is both a state machine (pictured below), and just generally a manager for events related to the Google Map. Later I would like to further abstract that state machine into its own class. 
+
+<img width="480" alt="mapmanagerstatemachine" src="https://cloud.githubusercontent.com/assets/7013639/12732409/6bfafb80-c903-11e5-8a52-b0b2db858d19.png">
+
