@@ -9,9 +9,9 @@ When a park is selected, the app will present name, address, phone, and website.
 
 # Design Decisions
 
-Much of the code for the Park Finder app is designed around Delegation and State Machines. Probably the best example of this can be seen in MapViewController. It is the main view controller the user interacts with, however is only ~200 lines despite being responsible for a Google Map and table of parks.
+Much of the code for the Park Finder app is designed around Delegation, Singletons, State Machines, and typical Model-View-Controller. I tried sticking to "skinny view controllers." Probably the best example of this can be seen in MapViewController. It is the main view controller the user interacts with, however is only ~200 lines despite being responsible for a Google Map and table of parks.
 
-I  generally favored Storyboards because I like how they make the UI flow visibly clear, and lower the amount of boilerplate code needed. 
+Generally I favor Storyboards because I like how they make the UI flow visibly clear, and lower the amount of boilerplate code needed. For small teams and independent projects I think they are the way to go.
 
 ### Google Map + Interaction Management
 
@@ -27,5 +27,9 @@ I chose to design it this way because it simplifies managing the app's state. Ne
 
 <img width="677" alt="locationverificationstatemachine" src="https://cloud.githubusercontent.com/assets/7013639/12732192/6f709212-c902-11e5-83af-95800f688aa2.png">
 
+### Updating Current Location
 
+Keeping with the theme of using state machines to manage related events over time, I used one to handle keeping the current location updated. The CurrentLocationManager is a singleton that updates keeps the user's location updated, and makes the current location available anywhere in the app. 
+
+<img width="735" alt="currentlocationmanagerstatemachine" src="https://cloud.githubusercontent.com/assets/7013639/12733032/595256b0-c906-11e5-86b4-7a4e0fd4fb70.png">
 
