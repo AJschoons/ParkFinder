@@ -36,3 +36,16 @@ Keeping with the theme of using state machines to manage related events over tim
 
 <img width="735" alt="currentlocationmanagerstatemachine" src="https://cloud.githubusercontent.com/assets/7013639/12733032/595256b0-c906-11e5-86b4-7a4e0fd4fb70.png">
 
+### Networking
+
+For networking in the app I chose to use the popular AFNetworking library. I like AFNetworking because it's easy to create singletons to handle interacting with each different API. It was slightly overkill since there weren't many calls necessary for each API used in ParkFinder. However, what I like about it is the networking logic is abstracted away to singleton Client objects that make the networking in view controllers (or their associated networking helpers/managers) as simple as:
+
+GooglePlacesClient.sharedClient.getPlacesNearbySearchParks(location, radius: radius,
+  success: { [weak self] task, responseObject in
+    guard let strongSelf = self else { return }
+    
+    ... code that does something with the nearby parks ...
+    
+  },
+  failure: defaultAFHTTPFailureBlock
+)
