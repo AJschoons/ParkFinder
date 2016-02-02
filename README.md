@@ -6,7 +6,7 @@ Park Finder is an app that allows users to search for nearby parks to visit and 
 
 When a park is selected, the app will present name, address, phone, and website. Selecting the address will open navigation through Google Maps, with Apples Maps as a fall back. Touching the phone number allows the user to call the park, and touching the website link will open the park's website in-app with Safari.
 
-The app and it's design, color scheme, abd logo, were all done by Adam Schoonmaker.
+The app and its design, color scheme, and logo, were all done by Adam Schoonmaker.
 
 <img src="https://cloud.githubusercontent.com/assets/7013639/12730935/39e1fff6-c8fc-11e5-8e9b-37aac951b717.png" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/7013639/12730941/3f8eb084-c8fc-11e5-9707-1833b4acec19.png" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/7013639/12730942/41f44c30-c8fc-11e5-8cda-e968c24413d6.png" width="23%"></img> <img src="https://cloud.githubusercontent.com/assets/7013639/12730947/46586aae-c8fc-11e5-8da2-cbb8f1b85b55.png" width="23%"></img>
 
