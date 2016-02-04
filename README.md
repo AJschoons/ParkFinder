@@ -2,7 +2,9 @@
 
 Repository for the Park Finder iOS app, available at: https://itunes.apple.com/us/app/park-finder-maps-nearby-park/id1078040422
 
-Park Finder is an app that allows users to search for nearby parks to visit and provides basic park details for further park research. Users can scroll or zoom the map from their current location and it will update with the 20 most popular parks around them. It is powered by Google Maps and Google Places, ensuring it has the most up-to-date information of local parks regardless of location. 
+Much more information at: https://github.com/SchoonSauce/ParkFinder
+
+Park Finder is an iOS app that allows users to search for nearby parks to visit and provides basic park information. Users can scroll or zoom the map from their current location and it will update with the 20 most popular parks around them. It is powered by Google Maps and Google Places, ensuring it has the most up-to-date information of local parks regardless of location.
 
 When a park is selected, the app will present its name, address, phone, and website. Selecting the address will open navigation through Google Maps, with Apples Maps as a fall back. Touching the phone number allows the user to call the park, and touching the website link will open the park's website in-app with Safari.
 
